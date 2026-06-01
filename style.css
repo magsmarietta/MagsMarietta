@@ -52,20 +52,16 @@ body {
   min-height: 100vh;
   background-image: radial-gradient(circle, #e0e0e0 1px, transparent 1px);
   background-size: 20px 20px;
-  overflow-x: hidden;
 }
 
 /* ===== OUTER WRAPPER ===== */
 #site-outer {
   max-width: 910px;
-  width: 100%;
   margin: 0 auto;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 9px;
-  box-sizing: border-box;
-  overflow-x: hidden;
 }
 
 @media (max-width: 700px) {
@@ -238,12 +234,9 @@ body {
 /* ===== PAGE BODY LAYOUT ===== */
 #page-wrap {
   display: grid;
-  grid-template-columns: minmax(150px, 210px) 1fr;
+  grid-template-columns: minmax(160px, 220px) 1fr;
   gap: 10px;
   align-items: start;
-  width: 100%;
-  box-sizing: border-box;
-  min-width: 0;
 }
 
 /* ===== SIDEBAR ===== */
