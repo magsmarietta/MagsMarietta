@@ -52,16 +52,20 @@ body {
   min-height: 100vh;
   background-image: radial-gradient(circle, #e0e0e0 1px, transparent 1px);
   background-size: 20px 20px;
+  overflow-x: hidden;
 }
 
 /* ===== OUTER WRAPPER ===== */
 #site-outer {
   max-width: 910px;
+  width: 100%;
   margin: 0 auto;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 9px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 @media (max-width: 700px) {
