@@ -470,6 +470,12 @@ body {
   gap: 12px;
 }
 
+@media (max-width: 950px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .product-card {
   border: var(--border);
   border-radius: var(--radius) var(--radius) 0 0;
