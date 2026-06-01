@@ -85,14 +85,3 @@ window.addEventListener('load', function () {
   document.head.appendChild(style);
 });
 
-  // Override animation distance with the exact pixel width of one strip
-  const stripW = strip.offsetWidth;
-  const style  = document.createElement('style');
-  style.textContent =
-    '@keyframes scroll-left {' +
-      '0%   { transform: translateX(0); }' +
-      '100% { transform: translateX(-' + stripW + 'px); }' +
-    '}' +
-    '.marquee-inner { animation: scroll-left 10s linear infinite; }';
-  document.head.appendChild(style);
-})();
