@@ -83,7 +83,7 @@ function handleEmailSubmit(btn) {
         '0%   { transform: translateX(0); }' +
         '100% { transform: translateX(-' + stripW + 'px); }' +
       '}' +
-      '.marquee-inner { animation: scroll-left 20s linear infinite; }';
+      '.marquee-inner { animation: scroll-left 23s linear infinite; }';
     document.head.appendChild(style);
   }, 800);
 })();
