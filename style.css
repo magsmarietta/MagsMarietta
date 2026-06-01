@@ -64,14 +64,14 @@ body {
   gap: 9px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
   #site-outer {
     padding: 8px;
     width: 100%;
     box-sizing: border-box;
   }
   #page-wrap {
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr;
     width: 100%;
   }
   #sidebar {
@@ -234,7 +234,7 @@ body {
 /* ===== PAGE BODY LAYOUT ===== */
 #page-wrap {
   display: grid;
-  grid-template-columns: minmax(160px, 220px) 1fr;
+  grid-template-columns: 1fr 2fr;
   gap: 10px;
   align-items: start;
 }
