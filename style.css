@@ -239,6 +239,7 @@ body {
   grid-template-columns: minmax(160px, 220px) 1fr;
   gap: 10px;
   align-items: start;
+  min-width: 0;
 }
 
 /* ===== SIDEBAR ===== */
@@ -246,6 +247,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
 }
 
 /* NAV LINKS */
@@ -423,6 +425,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
 }
 
 /* WELCOME */
