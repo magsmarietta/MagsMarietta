@@ -182,7 +182,7 @@ body {
   display: flex;
   align-items: center;
   gap: 7px;
-  animation: scroll-left 25s linear infinite;
+  animation: scroll-left 17s linear infinite;
   white-space: nowrap;
   flex-shrink: 0;
   padding: 0 5px;
