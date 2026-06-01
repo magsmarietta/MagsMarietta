@@ -57,11 +57,13 @@ body {
 /* ===== OUTER WRAPPER ===== */
 #site-outer {
   max-width: 910px;
+  width: 100%;
   margin: 0 auto;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 9px;
+  box-sizing: border-box;
 }
 
 @media (max-width: 700px) {
