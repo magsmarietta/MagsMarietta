@@ -77,9 +77,11 @@ body {
     width: 100%;
   }
   #sidebar {
+    order: 1;
     width: 100%;
   }
   #main-content {
+    order: 2;
     width: 100%;
   }
   .product-grid {
@@ -234,7 +236,7 @@ body {
 /* ===== PAGE BODY LAYOUT ===== */
 #page-wrap {
   display: grid;
-  grid-template-columns: minmax(160px, 220px) 1fr;
+  grid-template-columns: 1fr minmax(160px, 220px);
   gap: 10px;
   align-items: start;
   min-width: 0;
@@ -246,6 +248,7 @@ body {
   flex-direction: column;
   gap: 10px;
   min-width: 0;
+  order: -1;
 }
 
 /* NAV LINKS */
