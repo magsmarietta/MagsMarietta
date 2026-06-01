@@ -63,17 +63,27 @@ function handleEmailSubmit(btn) {
 
 
 // ===== MARQUEE: clone strip so it loops seamlessly =====
-(function () {
+window.addEventListener('load', function () {
   const strip = document.getElementById('marquee-strip-1');
   if (!strip) return;
 
-  // Two clones ensures the gap never shows on wide screens
   [1, 2].forEach(() => {
     const clone = strip.cloneNode(true);
     clone.removeAttribute('id');
     clone.setAttribute('aria-hidden', 'true');
     strip.parentNode.appendChild(clone);
   });
+
+  const stripW = strip.offsetWidth;
+  const style  = document.createElement('style');
+  style.textContent =
+    '@keyframes scroll-left {' +
+      '0%   { transform: translateX(0); }' +
+      '100% { transform: translateX(-' + stripW + 'px); }' +
+    '}' +
+    '.marquee-inner { animation: scroll-left 17s linear infinite; }';
+  document.head.appendChild(style);
+});
 
   // Override animation distance with the exact pixel width of one strip
   const stripW = strip.offsetWidth;
@@ -83,6 +93,6 @@ function handleEmailSubmit(btn) {
       '0%   { transform: translateX(0); }' +
       '100% { transform: translateX(-' + stripW + 'px); }' +
     '}' +
-    '.marquee-inner { animation: scroll-left 17s linear infinite; }';
+    '.marquee-inner { animation: scroll-left 10s linear infinite; }';
   document.head.appendChild(style);
 })();
