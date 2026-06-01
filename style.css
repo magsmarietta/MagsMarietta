@@ -127,6 +127,15 @@ body {
   border-bottom: 6px solid var(--border-br);
 }
 
+.panel-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
 .panel-body {
   padding: 12px;
 }
