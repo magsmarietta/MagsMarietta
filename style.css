@@ -64,10 +64,15 @@ body {
   gap: 9px;
 }
 
-@media (max-width: 910px) {
-  html {
-    font-size: 14px;
-    zoom: calc(100vw / 942);
+@media (max-width: 700px) {
+  #page-wrap {
+    grid-template-columns: 1fr;
+  }
+  #sidebar {
+    order: 2;
+  }
+  #main-content {
+    order: 1;
   }
 }
 
@@ -194,7 +199,7 @@ body {
 }
 
 .marquee-placeholder {
-  width: auto;
+  width: 40px;
   height: 40px;
   background: transparent;
   border-radius: 4px;
