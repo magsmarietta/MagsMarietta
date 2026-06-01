@@ -63,7 +63,7 @@ function handleEmailSubmit(btn) {
 
 
 // ===== MARQUEE: clone strip so it loops seamlessly =====
-window.addEventListener('load', function () {
+(function () {
   const strip = document.getElementById('marquee-strip-1');
   if (!strip) return;
 
@@ -74,14 +74,17 @@ window.addEventListener('load', function () {
     strip.parentNode.appendChild(clone);
   });
 
-  const stripW = strip.offsetWidth;
-  const style  = document.createElement('style');
-  style.textContent =
-    '@keyframes scroll-left {' +
-      '0%   { transform: translateX(0); }' +
-      '100% { transform: translateX(-' + stripW + 'px); }' +
-    '}' +
-    '.marquee-inner { animation: scroll-left 17s linear infinite; }';
-  document.head.appendChild(style);
-});
+  // Wait a beat for images to settle, then measure and inject animation
+  setTimeout(function () {
+    const stripW = strip.offsetWidth;
+    const style  = document.createElement('style');
+    style.textContent =
+      '@keyframes scroll-left {' +
+        '0%   { transform: translateX(0); }' +
+        '100% { transform: translateX(-' + stripW + 'px); }' +
+      '}' +
+      '.marquee-inner { animation: scroll-left 17s linear infinite; }';
+    document.head.appendChild(style);
+  }, 800);
+})();
 
