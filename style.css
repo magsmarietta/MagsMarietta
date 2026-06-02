@@ -104,6 +104,8 @@ body {
   gap: 8px;
   letter-spacing: 1px;
   border-bottom: 6px solid var(--border-br);
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .panel-icon {
