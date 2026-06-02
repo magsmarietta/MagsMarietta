@@ -1,0 +1,17 @@
+/* =====================================================
+   MAGS MARIETTA — mobile.css
+   Only loads on screens 700px wide and under.
+   Never edit style.css for mobile stuff — edit here.
+   ===================================================== */
+
+#site-outer {
+  padding: 8px;
+}
+
+#page-wrap {
+  grid-template-columns: 160px 1fr;
+}
+
+.product-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
