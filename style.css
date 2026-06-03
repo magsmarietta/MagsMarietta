@@ -614,7 +614,7 @@ body {
 
 /* ===== FOOTER ===== */
 footer {
-  background: var(--black);
+  background: var(--black) url('images/bg-footer.png') center center / cover no-repeat;
   color: var(--gray-mid);
   text-align: center;
   font-family: var(--font-body);
