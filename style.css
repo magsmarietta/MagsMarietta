@@ -131,7 +131,7 @@ body {
 }
 
 #site-header {
-  background: var(--black);
+  background: var(--black) url('images/bg-header.png') center center / cover no-repeat;
   color: var(--white);
   padding: 20px 20px;
   display: flex;
