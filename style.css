@@ -50,8 +50,10 @@ body {
   font-family: var(--font-body);
   font-size: 14px;
   min-height: 100vh;
-  background-image: radial-gradient(circle, #e0e0e0 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-image: url('images/bg-tile.png');
+  background-repeat: repeat;
+  background-size: 96px auto;
+  image-rendering: pixelated;
 }
 
 /* ===== OUTER WRAPPER ===== */
