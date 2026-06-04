@@ -41,6 +41,7 @@
   --font-body:   '04b03', monospace;
   --panel-main:  #fffffe;
   --panel-side:  #efede5;
+  --pink:   #d365e4;
 }
 
 /* ===== BODY ===== */
@@ -412,7 +413,7 @@ body {
 
 .tag:hover {
   background: var(--white);
-  color: var(--black);
+  color: var(--pink);
 }
 
 /* ===== MAIN CONTENT ===== */
