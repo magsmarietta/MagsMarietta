@@ -470,7 +470,7 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   overflow: visible;
-  padding-bottom: 40px;
+  padding-bottom: 60px;
 }
 
 .product-card {
