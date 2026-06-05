@@ -552,8 +552,8 @@ body {
   font-family: var(--font-body);
   font-size: 12px;
   position: absolute;
-  bottom: -24px;
-  : -16px;
+  bottom: -15px;
+  left: -16px;
   right: -16px;
   min-height: 64px;
   display: flex;
