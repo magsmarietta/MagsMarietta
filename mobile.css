@@ -1,6 +1,6 @@
 /* =====================================================
    MAGS MARIETTA — mobile.css
-   Only loads on screens 700px wide and under.
+   Only loads on portrait screens 700px wide and under.
    Never edit style.css for mobile stuff — edit here.
    ===================================================== */
 
@@ -22,4 +22,43 @@
   right: -8px;
   min-height: 40px;
   font-size: 10px;
+}
+
+/* ===== SHOP PAGE MOBILE ===== */
+
+/* Hide status and tags panels */
+.shop-page .shop-status-panel,
+.shop-page .shop-tags-panel {
+  display: none;
+}
+
+/* Stack layout vertically, full width */
+.shop-page #page-wrap {
+  grid-template-columns: 1fr;
+}
+
+/* Sidebar goes full width on top */
+.shop-page #sidebar {
+  width: 100%;
+}
+
+/* Nav panel becomes horizontal 2x2 grid */
+.shop-page .nav-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.shop-page .nav-links a {
+  width: 100%;
+}
+
+/* Inventory spans full width */
+.shop-page #main-content {
+  width: 100%;
+}
+
+/* Products go to 3 columns since we have full width now */
+.shop-page .product-grid {
+  grid-template-columns: repeat(3, 1fr);
 }
