@@ -271,7 +271,7 @@ body {
   letter-spacing: 0.5px;
   border-radius: 4px;
   border-top:    2px solid var(--border-tl);
-  border-:   2px solid var(--border-tl);
+  border-left:   2px solid var(--border-tl);
   border-right:  2px solid var(--border-br);
   border-bottom: 3px solid var(--border-br);
   background: var(--panel-main);
@@ -282,9 +282,9 @@ body {
 .nav-links a::after {
   content: "";
   position: absolute;
-  top: 0; : 0; right: 0; bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   border-top:    1px solid #d365e4;
-  border-:   1.5px solid #d365e4;
+  border-left:   1.5px solid #d365e4;
   border-right:  1.5px solid #d365e4;
   border-bottom: 2px solid #d365e4;
   border-radius: 2px;
@@ -380,7 +380,7 @@ body {
 
 .update-entry ul {
   list-style: none;
-  padding-: 0;
+  padding-left: 0;
 }
 
 .update-entry ul li::before {
@@ -477,7 +477,7 @@ body {
   border-width: 5px;
   border-style: solid;
   border-top-color:    var(--border-tl);
-  border--color:   var(--border-tl);
+  border-left-color:   var(--border-tl);
   border-bottom-color: var(--border-br);
   border-right-color:  var(--border-br);
   border-radius: var(--radius);
@@ -504,7 +504,7 @@ body {
   background: var(--black);
   color: var(--white);
   border-top:    2px solid var(--border-tl);
-  border-:   2px solid var(--border-tl);
+  border-left:   2px solid var(--border-tl);
   border-right:  2px solid var(--border-br);
   border-bottom: 3px solid var(--border-br);
   border-radius: 4px;
@@ -612,7 +612,7 @@ body {
 .contact-btn {
   background: var(--black);
   border: none;
-  border-: 2px solid var(--black);
+  border-left: 2px solid var(--black);
   padding: 10px 16px;
   font-family: var(--font-body);
   font-size: 12px;
