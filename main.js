@@ -6,12 +6,19 @@
 (function () {
   const loader = document.getElementById('loader');
   const bar    = document.getElementById('loader-bar');
+
+  if (sessionStorage.getItem('visited')) {
+    loader.remove();
+    return;
+  }
+
+  sessionStorage.setItem('visited', 'true');
+
   let progress = 0;
 
   function tick() {
     progress = Math.min(progress + 3 + Math.random() * 8, 100);
     bar.style.width = progress + '%';
-
     if (progress >= 100) {
       setTimeout(() => {
         loader.classList.add('fade-out');
@@ -24,7 +31,6 @@
 
   setTimeout(tick, 120);
 })();
-
 
 // ===== COLLAPSIBLE LOG =====
 function toggleLog(header) {
