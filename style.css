@@ -78,13 +78,12 @@ body {
   border-width: 5px;
   border-style: solid;
   border-top-color:    var(--border-tl);
-  border--color:   var(--border-tl);
+  border-left-color:   var(--border-tl);
   border-bottom-color: var(--border-br);
   border-right-color:  var(--border-br);
   border-radius: var(--radius) var(--radius) 0 0;
   overflow: hidden;
 }
-
 #sidebar .panel {
   background: var(--panel-side);
 }
@@ -110,6 +109,10 @@ body {
   border-bottom: 6px solid var(--border-br);
   white-space: nowrap;
   overflow: hidden;
+}
+
+.panel--inventory {
+  overflow: visible;
 }
 
 .panel-icon {
