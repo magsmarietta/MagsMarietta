@@ -94,24 +94,4 @@ function handleEmailSubmit(btn) {
   }, 800);
 })();
 
-// ===== CAROUSEL =====
-(function () {
-  const items = document.querySelectorAll('.carousel-item');
-  if (!items.length) return;
 
-  let current = 1; // start on middle item
-
-  function update() {
-    items.forEach((item, i) => {
-      item.classList.remove('active');
-      if (i === current) item.classList.add('active');
-    });
-  }
-
-  window.shiftCarousel = function (dir) {
-    current = (current - dir + items.length) % items.length;
-    update();
-  };
-
-  update();
-})();
