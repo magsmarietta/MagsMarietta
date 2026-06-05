@@ -109,7 +109,7 @@ function handleEmailSubmit(btn) {
   }
 
   window.shiftCarousel = function (dir) {
-    current = (current + dir + items.length) % items.length;
+    current = (current - dir + items.length) % items.length;
     update();
   };
 
