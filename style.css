@@ -650,7 +650,7 @@ footer span { color: var(--white); }
 #loader {
   position: fixed;
   inset: 0;
-  background: #000;
+  background: #2c2129;
   z-index: 99999;
   display: flex;
   flex-direction: column;
