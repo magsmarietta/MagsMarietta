@@ -482,6 +482,28 @@ body {
   filter: brightness(0.88);
 }
 
+/* SHOW MORE BUTTON */
+.show-more-btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 8px 24px;
+  background: var(--black);
+  color: var(--white);
+  border-top:    2px solid var(--border-tl);
+  border-left:   2px solid var(--border-tl);
+  border-right:  2px solid var(--border-br);
+  border-bottom: 3px solid var(--border-br);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.1s, color 0.1s;
+}
+
+.show-more-btn:hover {
+  background: var(--gray-dark);
+}
+
 .pixel-art-slot {
   width: 100%;
   aspect-ratio: 1;
