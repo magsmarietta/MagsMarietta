@@ -42,6 +42,7 @@
   --panel-main:  #fffffe;
   --panel-side:  #efede5;
   --pink:        #d365e4;
+  --darkpink:    #640956;
 }
 
 /* ===== BODY ===== */
@@ -413,7 +414,8 @@ body {
 
 .tag:hover {
   background: var(--white);
-  color: var(--pink);
+  color: var(--darkpink);
+  border: 2px solid var(--pink);
 }
 
 /* ===== MAIN CONTENT ===== */
