@@ -572,6 +572,24 @@ body {
   z-index: 3;
 }
 
+.product-price {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-top:    2px solid var(--border-tl);
+  border-left:   2px solid var(--border-tl);
+  border-right:  2px solid var(--border-br);
+  border-bottom: 3px solid var(--border-br);
+  border-radius: 4px;
+  letter-spacing: 1px;
+  z-index: 3;
+}
+
 /* CONTACT PANEL */
 .contact-heading {
   font-family: var(--font-body);
