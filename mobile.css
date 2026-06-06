@@ -63,3 +63,8 @@
   grid-template-columns: repeat(2, 1fr);
   padding-bottom: 12px;
 }
+
+.appraisal-banner {
+  min-height: 80px;
+  object-fit: cover;
+}
