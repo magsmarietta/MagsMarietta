@@ -60,6 +60,6 @@
 
 /* Products go to 3 columns since we have full width now */
 .shop-page .product-grid {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   padding-bottom: 12px;
 }
