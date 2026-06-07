@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop — Mags Marietta</title>
+<title>About — Mags Marietta</title>
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="mobile.css" media="(max-width: 700px) and (orientation: portrait)">
 </head>
-<body class="shop-page">
+<body class="about-page">
 
 <!-- ===== LOADING SCREEN ===== -->
 <div id="loader">
@@ -100,7 +100,7 @@
       </div>
 
       <!-- SHOP STATUS -->
-      <div class="panel shop-status-panel">
+      <div class="panel about-status-panel">
         <div class="panel-title"><img src="images/icon-status.gif" alt="" class="panel-icon"> Shop Status</div>
         <div class="panel-body" style="padding:0;">
           <div class="status-cell"><span>ORDERS</span><span class="status-val open">OPEN</span></div>
@@ -114,7 +114,7 @@
       </div>
 
       <!-- TAGS -->
-      <div class="panel shop-tags-panel">
+      <div class="panel about-tags-panel">
         <div class="panel-title"><img src="images/icon-tags.gif" alt="" class="panel-icon"> Tags</div>
         <div class="panel-body">
           <div class="tags-wrap">
@@ -134,44 +134,49 @@
     <!-- MAIN CONTENT -->
     <main id="main-content">
 
-      <!-- INVENTORY -->
-      <div class="panel panel--inventory">
-        <div class="panel-title"><img src="images/icon-featured.gif" alt="" class="panel-icon"> Inventory</div>
-        <div class="panel-body">
-          <div class="product-grid">
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Statement Ring</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Zipper Tags</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Aglets</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Grommets</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Ring Blanks</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Hardware Set</div>
-            </div>
+      <!-- APPRAISAL -->
+      <div class="panel">
+        <div class="panel-title"><img src="images/icon-appraise.gif" alt="" class="panel-icon"> Appraisal</div>
+        <div class="panel-body appraisal-text">
+          <img src="images/shop-bnr.png" class="appraisal-banner" style="width:100%; image-rendering:pixelated; display:block; margin-bottom:10px;">
+          <hr class="divider">
+
+          <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:14px;">
+            <img src="images/corrosion.png" style="width:50px;height:auto;image-rendering:pixelated;flex-shrink:0;margin-top:2px;">
+            <p><strong>Corrosion Resistant</strong> — Will not rust, tarnish, or oxidize. Safe for daily wear in water, sweat, and sun.</p>
           </div>
+
+          <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:14px;">
+            <img src="images/impact.png" style="width:50px;height:auto;image-rendering:pixelated;flex-shrink:0;margin-top:2px;">
+            <p><strong>Impact Resistant</strong> — Hardened against scratches, dents, and surface damage that would destroy lesser metals.</p>
+          </div>
+
+          <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:14px;">
+            <img src="images/hypo.png" style="width:50px;height:auto;image-rendering:pixelated;flex-shrink:0;margin-top:2px;">
+            <p><strong>Hypoallergenic</strong> — Will not turn your skin green. The high chromium content creates a protective self-repairing surface.</p>
+          </div>
+
+          <hr class="divider">
+          <p style="color: var(--gray-dark); font-size: 12px;">// Built to outlast everything you put it through.</p>
         </div>
       </div>
+
+      <!-- SHIPPING INFORMATION -->
+      <div class="panel">
+        <div class="panel-title"><img src="images/icon-status.gif" alt="" class="panel-icon"> Shipping Information</div>
+        <div class="panel-body appraisal-text">
+          <p>Add your shipping details here.</p>
+        </div>
+      </div>
+
+      <!-- INSTRUCTIONS -->
+      <div class="panel">
+        <div class="panel-title"><img src="images/icon-home.gif" alt="" class="panel-icon"> Instructions</div>
+        <div class="panel-body appraisal-text">
+          <p>Add your care and wear instructions here.</p>
+        </div>
+      </div>
+
     </main>
   </div>
 

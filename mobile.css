@@ -70,3 +70,32 @@
   object-fit: fill;
   image-rendering: pixelated;
 }
+
+/* ===== ABOUT PAGE MOBILE ===== */
+
+.about-page .about-status-panel,
+.about-page .about-tags-panel {
+  display: none;
+}
+
+.about-page #page-wrap {
+  grid-template-columns: 1fr;
+}
+
+.about-page #sidebar {
+  width: 100%;
+}
+
+.about-page .nav-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.about-page .nav-links a {
+  width: 100%;
+}
+
+.about-page #main-content {
+  width: 100%;
+}
