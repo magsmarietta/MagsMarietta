@@ -99,3 +99,13 @@
 .about-page #main-content {
   width: 100%;
 }
+
+.status-cell {
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+
+.status-val {
+  white-space: nowrap;
+  margin-left: auto;
+}
