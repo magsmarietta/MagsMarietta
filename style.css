@@ -283,10 +283,10 @@ body {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  border-top:    1px solid #d365e4;
-  border-left:   1.5px solid #d365e4;
-  border-right:  1.5px solid #d365e4;
-  border-bottom: 2px solid #d365e4;
+  border-top:    1px solid var(--hover-color, #d365e4);
+  border-left:   1.5px solid var(--hover-color, #d365e4);
+  border-right:  1.5px solid var(--hover-color, #d365e4);
+  border-bottom: 2px solid var(--hover-color, #d365e4);
   border-radius: 2px;
   pointer-events: none;
   opacity: 0;
