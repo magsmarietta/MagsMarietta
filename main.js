@@ -117,3 +117,22 @@ function handleEmailSubmit(btn) {
     });
   });
 })();
+
+// ===== RANDOM NAV HOVER COLORS =====
+(function () {
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const colors = [
+    '#d365e4', '#e45b8a', '#8a5be4', '#5b8ae4',
+    '#e4a85b', '#5be4a8', '#e45b5b', '#a8e45b'
+  ];
+
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', function () {
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      this.style.setProperty('--hover-color', color);
+    });
+    link.addEventListener('mouseleave', function () {
+      this.style.removeProperty('--hover-color');
+    });
+  });
+})();
