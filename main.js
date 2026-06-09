@@ -95,3 +95,25 @@ function handleEmailSubmit(btn) {
 })();
 
 
+// ===== RANDOM TAG HOVER COLORS =====
+(function () {
+  const tags = document.querySelectorAll('.tag');
+  const colors = [
+    '#d365e4', '#e45b8a', '#8a5be4', '#5b8ae4',
+    '#e4a85b', '#5be4a8', '#e45b5b', '#a8e45b'
+  ];
+
+  tags.forEach(tag => {
+    tag.addEventListener('mouseenter', function () {
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      this.style.background = 'var(--white)';
+      this.style.color = color;
+      this.style.borderColor = color;
+    });
+    tag.addEventListener('mouseleave', function () {
+      this.style.background = '';
+      this.style.color = '';
+      this.style.borderColor = '';
+    });
+  });
+})();
