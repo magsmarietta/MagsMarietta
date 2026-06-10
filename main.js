@@ -105,15 +105,34 @@ function handleEmailSubmit(btn) {
 
   tags.forEach(tag => {
     tag.addEventListener('mouseenter', function () {
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      this.style.background = 'var(--white)';
-      this.style.color = color;
-      this.style.borderColor = color;
+      if (!this.classList.contains('active')) {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        this.style.background = 'var(--white)';
+        this.style.color = color;
+        this.style.borderColor = color;
+      }
     });
     tag.addEventListener('mouseleave', function () {
-      this.style.background = '';
-      this.style.color = '';
-      this.style.borderColor = '';
+      if (!this.classList.contains('active')) {
+        this.style.background = '';
+        this.style.color = '';
+        this.style.borderColor = '';
+      }
+    });
+    tag.addEventListener('click', function () {
+      const isActive = this.classList.contains('active');
+      if (isActive) {
+        this.classList.remove('active');
+        this.style.background = '';
+        this.style.color = '';
+        this.style.borderColor = '';
+      } else {
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        this.classList.add('active');
+        this.style.background = 'var(--white)';
+        this.style.color = color;
+        this.style.borderColor = color;
+      }
     });
   });
 })();
