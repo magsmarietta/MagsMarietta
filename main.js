@@ -104,14 +104,17 @@ function handleEmailSubmit(btn) {
   ];
 
   tags.forEach(tag => {
+    let currentColor = null;
+
     tag.addEventListener('mouseenter', function () {
       if (!this.classList.contains('active')) {
-        const color = colors[Math.floor(Math.random() * colors.length)];
+        currentColor = colors[Math.floor(Math.random() * colors.length)];
         this.style.background = 'var(--white)';
-        this.style.color = color;
-        this.style.borderColor = color;
+        this.style.color = currentColor;
+        this.style.borderColor = currentColor;
       }
     });
+
     tag.addEventListener('mouseleave', function () {
       if (!this.classList.contains('active')) {
         this.style.background = '';
@@ -119,19 +122,19 @@ function handleEmailSubmit(btn) {
         this.style.borderColor = '';
       }
     });
+
     tag.addEventListener('click', function () {
       const isActive = this.classList.contains('active');
       if (isActive) {
         this.classList.remove('active');
-        this.style.background = '';
-        this.style.color = '';
-        this.style.borderColor = '';
+        this.style.background = 'var(--white)';
+        this.style.color = currentColor;
+        this.style.borderColor = currentColor;
       } else {
-        const color = colors[Math.floor(Math.random() * colors.length)];
         this.classList.add('active');
         this.style.background = 'var(--white)';
-        this.style.color = color;
-        this.style.borderColor = color;
+        this.style.color = currentColor;
+        this.style.borderColor = currentColor;
       }
     });
   });
