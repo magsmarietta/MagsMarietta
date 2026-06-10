@@ -102,7 +102,6 @@ function handleEmailSubmit(btn) {
     '#d365e4', '#e45b8a', '#8a5be4', '#5b8ae4',
     '#e4a85b', '#5be4a8', '#e45b5b', '#a8e45b'
   ];
-
   const isTouch = window.matchMedia('(hover: none)').matches;
 
   tags.forEach(tag => {
@@ -110,12 +109,10 @@ function handleEmailSubmit(btn) {
 
     if (!isTouch) {
       tag.addEventListener('mouseenter', function () {
-        if (!this.classList.contains('active')) {
-          currentColor = colors[Math.floor(Math.random() * colors.length)];
-          this.style.background = 'var(--white)';
-          this.style.color = currentColor;
-          this.style.borderColor = currentColor;
-        }
+        currentColor = colors[Math.floor(Math.random() * colors.length)];
+        this.style.background = 'var(--white)';
+        this.style.color = currentColor;
+        this.style.borderColor = currentColor;
       });
 
       tag.addEventListener('mouseleave', function () {
@@ -123,6 +120,10 @@ function handleEmailSubmit(btn) {
           this.style.background = '';
           this.style.color = '';
           this.style.borderColor = '';
+        } else {
+          this.style.background = 'var(--white)';
+          this.style.color = currentColor;
+          this.style.borderColor = currentColor;
         }
       });
     }
@@ -131,12 +132,20 @@ function handleEmailSubmit(btn) {
       const isActive = this.classList.contains('active');
       if (isActive) {
         this.classList.remove('active');
-        this.style.background = '';
-        this.style.color = '';
-        this.style.borderColor = '';
-        currentColor = null;
+        if (!isTouch) {
+          this.style.background = 'var(--white)';
+          this.style.color = currentColor;
+          this.style.borderColor = currentColor;
+        } else {
+          this.style.background = '';
+          this.style.color = '';
+          this.style.borderColor = '';
+          currentColor = null;
+        }
       } else {
-        currentColor = colors[Math.floor(Math.random() * colors.length)];
+        if (isTouch) {
+          currentColor = colors[Math.floor(Math.random() * colors.length)];
+        }
         this.classList.add('active');
         this.style.background = 'var(--white)';
         this.style.color = currentColor;
