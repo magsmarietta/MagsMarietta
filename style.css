@@ -415,12 +415,6 @@ body {
   user-select: none;
 }
 
-.tag:hover {
-  background: var(--white);
-  color: var(--darkpink);
-  border: 2px solid var(--pink);
-}
-
 /* ===== MAIN CONTENT ===== */
 #main-content {
   display: flex;
