@@ -109,10 +109,16 @@ function handleEmailSubmit(btn) {
 
     if (!isTouch) {
       tag.addEventListener('mouseenter', function () {
-        currentColor = colors[Math.floor(Math.random() * colors.length)];
-        this.style.background = 'var(--white)';
-        this.style.color = currentColor;
-        this.style.borderColor = currentColor;
+        if (this.classList.contains('active')) {
+          this.style.background = 'var(--white)';
+          this.style.color = currentColor;
+          this.style.borderColor = currentColor;
+        } else {
+          currentColor = colors[Math.floor(Math.random() * colors.length)];
+          this.style.background = 'var(--white)';
+          this.style.color = currentColor;
+          this.style.borderColor = currentColor;
+        }
       });
 
       tag.addEventListener('mouseleave', function () {
@@ -120,10 +126,6 @@ function handleEmailSubmit(btn) {
           this.style.background = '';
           this.style.color = '';
           this.style.borderColor = '';
-        } else {
-          this.style.background = 'var(--white)';
-          this.style.color = currentColor;
-          this.style.borderColor = currentColor;
         }
       });
     }
@@ -132,16 +134,10 @@ function handleEmailSubmit(btn) {
       const isActive = this.classList.contains('active');
       if (isActive) {
         this.classList.remove('active');
-        if (!isTouch) {
-          this.style.background = 'var(--white)';
-          this.style.color = currentColor;
-          this.style.borderColor = currentColor;
-        } else {
-          this.style.background = '';
-          this.style.color = '';
-          this.style.borderColor = '';
-          currentColor = null;
-        }
+        currentColor = null;
+        this.style.background = '';
+        this.style.color = '';
+        this.style.borderColor = '';
       } else {
         if (isTouch) {
           currentColor = colors[Math.floor(Math.random() * colors.length)];
