@@ -621,7 +621,7 @@
     renderer.setSize(W(), H());
     renderer.outputColorSpace    = THREE.SRGBColorSpace;
     renderer.toneMapping         = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 2.0;
     renderer.shadowMap.enabled   = true;
     renderer.shadowMap.type      = THREE.PCFSoftShadowMap;
 
@@ -655,29 +655,29 @@
 
     // ── Lighting: studio setup for brushed stainless ──
     // Key light — warm top
-    const key = new THREE.DirectionalLight(0xfff8f0, 4.0);
+    const key = new THREE.DirectionalLight(0xfff8f0, 8.0);
     key.position.set(3, 8, 5);
     key.castShadow = true;
     key.shadow.mapSize.set(1024, 1024);
     scene.add(key);
 
     // Rim — cool blue back-left
-    const rim = new THREE.DirectionalLight(0xa8c4e0, 2.2);
+    const rim = new THREE.DirectionalLight(0xa8c4e0, 5.0);
     rim.position.set(-4, 3, -5);
     scene.add(rim);
 
     // Fill — soft warm front-low
-    const fill = new THREE.DirectionalLight(0xffe0c0, 0.8);
+    const fill = new THREE.DirectionalLight(0xffe0c0, 3.0);
     fill.position.set(2, -2, 4);
     scene.add(fill);
 
     // Under — subtle bounce
-    const under = new THREE.DirectionalLight(0x8899aa, 0.6);
+    const under = new THREE.DirectionalLight(0x8899aa, 2.0);
     under.position.set(0, -6, 2);
     scene.add(under);
 
     // Ambient
-    scene.add(new THREE.AmbientLight(0x404040, 1.4));
+    scene.add(new THREE.AmbientLight(0xffffff, 2.5));
 
     // Environment map from scene lights (gives reflections on metalness)
     const pmrem    = new THREE.PMREMGenerator(renderer);
@@ -712,10 +712,10 @@
         node.castShadow    = true;
         node.receiveShadow = true;
         node.material = new THREE.MeshStandardMaterial({
-          color:           new THREE.Color(0xb0b0b0), // cool mid-grey steel
-          metalness:       0.96,
-          roughness:       0.30,                       // brushed — not mirror, not matte
-          envMapIntensity: 1.6,
+          color:           new THREE.Color(0xd4d4d4), // bright polished steel
+          metalness:       1.0,
+          roughness:       0.05,                       // near-mirror polish
+          envMapIntensity: 5.0,
         });
       });
 
