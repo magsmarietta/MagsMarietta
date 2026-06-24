@@ -185,44 +185,8 @@
       <div class="panel">
         <div class="panel-title"><img src="images/icon-featured.gif" alt="" class="panel-icon"> Featured Items</div>
         <div class="panel-body">
-          <div class="product-grid product-grid--featured">
-            <!--
-              PRODUCT IMAGES: product-ring.webp, product-zipper.webp, etc.
-              Recommended: square, ~400×400 px
-              Drop files at: images/product-ring.webp, etc.
-              Replace the <span>pixel art</span> placeholder with an <img> tag when ready:
-                <img src="images/product-ring.webp" alt="Statement Ring" style="width:100%;height:100%;object-fit:cover;image-rendering:pixelated;">
-            -->
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Skull Tag</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Mace Tag</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Spirit Tag</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Ring</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Aglet</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Lace Hardware</div>
-            </div>
+          <div class="product-grid product-grid--featured" id="featured-grid">
+            <!-- Populated by products.js -->
           </div>
           <div style="text-align:center; margin-top:-30px; position:relative; z-index:4;">
             <a href="shop.html" class="show-more-btn">SHOW MORE</a>
@@ -273,6 +237,33 @@
 
 </div>
 
+<script src="products.js"></script>
 <script src="main.js"></script>
+<script>
+// ── Populate featured grid from products.js ───────────
+(function () {
+  if (typeof PRODUCTS === 'undefined') return;
+  const grid = document.getElementById('featured-grid');
+  if (!grid) return;
+
+  PRODUCTS.forEach(p => {
+    const card = document.createElement('a');
+    card.className = 'product-card';
+    card.href      = `product.html?id=${p.id}`;
+    card.title     = p.name;
+    card.style.cssText = 'display:block;text-decoration:none;color:inherit;overflow:visible;position:relative;';
+
+    const imgHTML = p.thumbnail
+      ? `<img src="${p.thumbnail}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);">`
+      : `<div class="pixel-art-slot"><span>pixel art</span></div>`;
+
+    card.innerHTML = `
+      <div class="product-price">$${p.price.toFixed(2)}</div>
+      ${imgHTML}
+      <div class="product-label">${p.name}</div>`;
+    grid.appendChild(card);
+  });
+})();
+</script>
 </body>
 </html>

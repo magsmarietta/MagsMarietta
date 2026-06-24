@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product — Mags Marietta</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="mobile.css" media="(max-width: 700px) and (orientation: portrait)">
+
+<style>
+/* =====================================================
+   PRODUCT PAGE — product.css (inlined)
+   Inherits all style.css tokens. Only product-specific
+   rules live here.
+   ===================================================== */
+
+/* ── Layout ─────────────────────────────────────────── */
+.product-page-wrap {
+  display: grid;
+  grid-template-columns: minmax(160px, 220px) 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+/* ── 3D Viewer Panel ─────────────────────────────────── */
+.viewer-panel {
+  position: relative;
+  overflow: hidden;
+  background: var(--gray-light);
+  /* match .pixel-art-slot grid pattern */
+  background-image:
+    linear-gradient(#ccc 1px, transparent 1px),
+    linear-gradient(90deg, #ccc 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+#viewer-canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  image-rendering: auto; /* canvas needs crisp pixels off */
+}
+#viewer-canvas:active { cursor: grabbing; }
+
+/* The viewer-panel needs an explicit height; we set it via the aspect wrapper */
+.viewer-aspect {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+}
+
+/* Loading indicator */
+.viewer-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+  z-index: 2;
+  background: inherit;
+}
+.viewer-loading.hidden { display: none; }
+
+.loader-ring {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--gray-mid);
+  border-top-color: var(--black);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loader-ring-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--gray-dark);
+  letter-spacing: 1px;
+}
+
+/* No-model placeholder */
+.no-model {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.no-model.visible { display: flex; }
+.no-model-icon {
+  font-family: var(--font-pixel);
+  font-size: 36px;
+  color: var(--gray-dark);
+  opacity: 0.3;
+}
+.no-model-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--gray-dark);
+  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* Viewer hint bar below canvas */
+.viewer-hint {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--gray-dark);
+  text-align: center;
+  padding: 5px 8px;
+  border-top: 3px solid var(--border-br);
+  letter-spacing: 0.5px;
+  background: var(--panel-side);
+}
+
+/* ── Product Info ─────────────────────────────────────── */
+.product-info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--gray-dark);
+  letter-spacing: 0.5px;
+  padding: 6px 10px;
+}
+.breadcrumb a {
+  color: var(--gray-dark);
+  text-decoration: none;
+}
+.breadcrumb a:hover { color: var(--black); text-decoration: underline; }
+.breadcrumb .sep { margin: 0 4px; }
+
+/* Name & Price header block */
+.product-name-block {
+  padding: 10px 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.product-pg-category {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--gray-dark);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.product-pg-name {
+  font-family: var(--font-pixel);
+  font-size: 28px;
+  color: var(--black);
+  line-height: 1;
+  letter-spacing: 1px;
+}
+.product-pg-price {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--black);
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+/* Description */
+.product-pg-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--gray-dark);
+  padding: 0 12px;
+}
+
+/* Specs */
+.specs-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--gray-dark);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0 12px;
+  margin-bottom: 4px;
+}
+.specs-list {
+  list-style: none;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.specs-list li {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--black);
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--gray-mid);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.specs-list li:last-child { border-bottom: none; }
+.specs-list li::before {
+  content: "▸";
+  color: var(--gray-dark);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* Quantity + CTA */
+.cta-block {
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qty-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--gray-dark);
+  letter-spacing: 1px;
+}
+
+.qty-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: fit-content;
+  border-top:    2px solid var(--border-tl);
+  border-left:   2px solid var(--border-tl);
+  border-right:  2px solid var(--border-br);
+  border-bottom: 3px solid var(--border-br);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--panel-main);
+}
+
+.qty-btn {
+  background: var(--panel-side);
+  border: none;
+  color: var(--black);
+  font-family: var(--font-pixel);
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.1s;
+}
+.qty-btn:hover { background: var(--gray-mid); }
+
+.qty-val {
+  font-family: var(--font-body);
+  font-size: 13px;
+  width: 32px;
+  text-align: center;
+  border-left:  1px solid var(--gray-mid);
+  border-right: 1px solid var(--gray-mid);
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 1px;
+}
+
+.btn-add-cart {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 10px 20px;
+  background: var(--black);
+  color: var(--white);
+  border-top:    2px solid var(--border-tl);
+  border-left:   2px solid var(--border-tl);
+  border-right:  2px solid var(--border-br);
+  border-bottom: 3px solid var(--border-br);
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, transform 0.08s;
+  width: 100%;
+  text-align: center;
+}
+.btn-add-cart:hover { background: var(--gray-dark); }
+.btn-add-cart:active { transform: scale(0.97); }
+.btn-add-cart.added {
+  background: #228B22;
+  letter-spacing: 1px;
+}
+
+.btn-inquiry {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  padding: 7px 20px;
+  background: var(--panel-side);
+  color: var(--gray-dark);
+  border-top:    2px solid var(--border-tl);
+  border-left:   2px solid var(--border-tl);
+  border-right:  2px solid var(--border-br);
+  border-bottom: 3px solid var(--border-br);
+  border-radius: 4px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  transition: background 0.1s, color 0.1s;
+}
+.btn-inquiry:hover {
+  background: var(--gray-mid);
+  color: var(--black);
+}
+
+/* ── Not Found ──────────────────────────────────────── */
+.not-found-panel {
+  text-align: center;
+  padding: 40px 20px;
+}
+.not-found-panel p {
+  font-family: var(--font-pixel);
+  font-size: 28px;
+  color: var(--gray-dark);
+  margin-bottom: 12px;
+}
+.not-found-panel a {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--black);
+  text-decoration: underline;
+  letter-spacing: 1px;
+}
+
+/* ── Mobile overrides ────────────────────────────────── */
+@media (max-width: 700px) and (orientation: portrait) {
+  .product-page-wrap {
+    grid-template-columns: 1fr;
+  }
+  .product-pg-name { font-size: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-ring { animation: none; }
+}
+</style>
+
+<!-- Three.js via import map -->
+<script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.155.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.155.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body class="product-page">
+
+<!-- ===== LOADING SCREEN ===== -->
+<div id="loader">
+  <img src="images/loading-eyeball.gif" alt="" style="width:80px;height:80px;image-rendering:pixelated;margin-bottom:16px;">
+  <div class="loader-logo">MAGS MARIETTA</div>
+  <div class="loader-bar-wrap">
+    <div class="loader-bar-inner" id="loader-bar"></div>
+  </div>
+  <div class="loader-status" id="loader-status">LOADING WEBSITE // PLEASE WAIT...</div>
+</div>
+
+<div id="site-outer">
+
+  <!-- HEADER -->
+  <div class="panel panel--header">
+    <div id="site-header">
+      <div id="site-title-block">
+        <h1><a href="index.html" style="color:inherit;text-decoration:none;">Mags Marietta</a></h1>
+        <p>Jewelry &amp; Hardware</p>
+      </div>
+      <img id="header-heart" src="images/header-heart.webp" alt="gothic heart gem" />
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="panel" id="marquee-panel" aria-hidden="true">
+    <div class="panel-body">
+      <div class="marquee-track">
+        <div class="marquee-inner" id="marquee-strip-1">
+          <div class="marquee-placeholder"><img src="images/marquee-1.gif"  alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-2.gif"  alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-3.gif"  alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-4.gif"  alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-5.gif"  alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-6.webp" alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-7.gif"  alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-8.gif"  alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-9.gif"  alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-10.gif" alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-11.gif" alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-12.webp" alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-13.gif" alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="images/marquee-14.gif" alt="" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE BODY -->
+  <div id="page-wrap" class="product-page-wrap">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+
+      <!-- NAVIGATION -->
+      <div class="panel">
+        <div class="panel-title"><img src="images/icon-nav.gif" alt="" class="panel-icon"> Navigation</div>
+        <div class="panel-body">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#contact-panel">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SHOP STATUS -->
+      <div class="panel">
+        <div class="panel-title"><img src="images/icon-status.gif" alt="" class="panel-icon"> Shop Status</div>
+        <div class="panel-body" style="padding:0;">
+          <div class="status-cell"><span>ORDERS</span><span class="status-val open">OPEN</span></div>
+          <div class="status-sep">- - - - - - - - - - - - - - -</div>
+          <div class="status-cell"><span>CUSTOMS</span><span class="status-val open">OPEN</span></div>
+          <div class="status-sep">- - - - - - - - - - - - - - -</div>
+          <div class="status-cell"><span>STOCK</span><span class="status-val avail">AVAIL.</span></div>
+          <div class="status-sep">- - - - - - - - - - - - - - -</div>
+          <div class="status-cell"><span>SHIP TIME</span><span class="status-val">12-14 DAYS</span></div>
+        </div>
+      </div>
+
+      <!-- TAGS -->
+      <div class="panel">
+        <div class="panel-title"><img src="images/icon-tags.gif" alt="" class="panel-icon"> Tags</div>
+        <div class="panel-body">
+          <div class="tags-wrap">
+            <span class="tag">Jewelry</span>
+            <span class="tag">Hardware</span>
+            <span class="tag">Custom</span>
+            <span class="tag">Small Batch</span>
+            <span class="tag">Indie Shop</span>
+            <span class="tag">Alt Fashion</span>
+            <span class="tag">Est. 2025</span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT: populated by JS -->
+    <main id="main-content" style="overflow:visible;">
+      <div id="product-app"></div>
+    </main>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Mags Marietta</span> &copy; 2025 // Designed to Outlast
+  </footer>
+
+</div>
+
+<!-- Product data -->
+<script src="products.js"></script>
+<!-- Main site JS (loading bar, marquee, tags, nav hover) -->
+<script src="main.js"></script>
+
+<!-- Product page logic + 3D viewer -->
+<script type="module">
+  import * as THREE from 'three';
+  import { GLTFLoader }    from 'three/addons/loaders/GLTFLoader.js';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+  // ── 1. Resolve product from URL ──────────────────────
+  const params  = new URLSearchParams(window.location.search);
+  const id      = params.get('id');
+  const product = (typeof PRODUCTS !== 'undefined') && PRODUCTS.find(p => p.id === id);
+  const app     = document.getElementById('product-app');
+
+  if (!product) {
+    renderNotFound();
+  } else {
+    document.title = `${product.name} — Mags Marietta`;
+    renderProduct(product);
+  }
+
+  // ── 2. Not found state ───────────────────────────────
+  function renderNotFound() {
+    app.innerHTML = `
+      <div class="panel">
+        <div class="panel-title">!! Error</div>
+        <div class="panel-body not-found-panel">
+          <p>ITEM NOT FOUND</p>
+          <a href="shop.html">← Return to Shop</a>
+        </div>
+      </div>`;
+  }
+
+  // ── 3. Render full product page ──────────────────────
+  function renderProduct(p) {
+    app.innerHTML = `
+
+      <!-- Breadcrumb -->
+      <div class="panel">
+        <div class="panel-body breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="sep">&rsaquo;</span>
+          <a href="shop.html">Shop</a>
+          <span class="sep">&rsaquo;</span>
+          ${p.name}
+        </div>
+      </div>
+
+      <!-- 3D Viewer -->
+      <div class="panel panel--inventory viewer-panel">
+        <div class="panel-title">
+          <img src="images/icon-featured.gif" alt="" class="panel-icon"> 3D Preview
+        </div>
+        <div class="viewer-aspect">
+          <canvas id="viewer-canvas"></canvas>
+          <div class="viewer-loading" id="viewer-loading">
+            <div class="loader-ring"></div>
+            <div class="loader-ring-label">LOADING MODEL...</div>
+          </div>
+          <div class="no-model" id="no-model">
+            <div class="no-model-icon">⬡</div>
+            <div class="no-model-label">3D MODEL<br>COMING SOON</div>
+          </div>
+        </div>
+        <div class="viewer-hint">DRAG to rotate &nbsp;·&nbsp; SCROLL to zoom &nbsp;·&nbsp; Auto-spins when idle</div>
+      </div>
+
+      <!-- Product Info -->
+      <div class="panel product-info-panel">
+        <div class="panel-title">
+          <img src="images/icon-featured.gif" alt="" class="panel-icon"> ${p.name}
+        </div>
+        <div class="panel-body" style="display:flex;flex-direction:column;gap:10px;padding-top:10px;">
+
+          <div>
+            <div class="product-pg-category">${p.category}</div>
+            <div class="product-pg-price">$${p.price.toFixed(2)}</div>
+          </div>
+
+          <hr class="divider">
+
+          <p class="product-pg-desc">${p.description}</p>
+
+          <hr class="divider">
+
+          <div>
+            <div class="specs-label">Specifications</div>
+            <ul class="specs-list">
+              ${p.details.map(d => `<li>${d}</li>`).join('')}
+            </ul>
+          </div>
+
+          <hr class="divider">
+
+          <div class="cta-block" style="padding:0;">
+            <div class="qty-label">QTY</div>
+            <div class="qty-row">
+              <button class="qty-btn" id="qty-minus">−</button>
+              <div class="qty-val" id="qty-val">1</div>
+              <button class="qty-btn" id="qty-plus">+</button>
+            </div>
+            <button class="btn-add-cart" id="btn-add">ADD TO CART</button>
+            <a class="btn-inquiry"
+               href="mailto:hello@magsmarietta.com?subject=B2B Inquiry — ${encodeURIComponent(p.name)}">
+               B2B / BULK INQUIRY
+            </a>
+          </div>
+
+        </div>
+      </div>`;
+
+    // Quantity
+    let qty = 1;
+    document.getElementById('qty-minus').addEventListener('click', () => {
+      if (qty > 1) { qty--; document.getElementById('qty-val').textContent = qty; }
+    });
+    document.getElementById('qty-plus').addEventListener('click', () => {
+      qty++; document.getElementById('qty-val').textContent = qty;
+    });
+
+    // Add to cart
+    document.getElementById('btn-add').addEventListener('click', () => {
+      const btn = document.getElementById('btn-add');
+      btn.textContent = '✓ ADDED';
+      btn.classList.add('added');
+      setTimeout(() => {
+        btn.textContent = 'ADD TO CART';
+        btn.classList.remove('added');
+      }, 2000);
+      console.log('Cart:', { id: p.id, qty });
+      // TODO: wire to your cart / Payhip / checkout
+    });
+
+    // Start viewer
+    initViewer(p.model);
+  }
+
+  // ── 4. Three.js viewer ───────────────────────────────
+  async function initViewer(modelPath) {
+    const canvas   = document.getElementById('viewer-canvas');
+    const loading  = document.getElementById('viewer-loading');
+    const noModel  = document.getElementById('no-model');
+    if (!canvas) return;
+
+    const panel = canvas.closest('.viewer-aspect');
+    const W = () => panel.clientWidth;
+    const H = () => panel.clientHeight;
+
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(W(), H());
+    renderer.outputColorSpace    = THREE.SRGBColorSpace;
+    renderer.toneMapping         = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    renderer.shadowMap.enabled   = true;
+    renderer.shadowMap.type      = THREE.PCFSoftShadowMap;
+
+    // Scene — use site's light panel-side grey as BG
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf0f0f0);
+
+    // Camera
+    const camera = new THREE.PerspectiveCamera(36, W() / H(), 0.01, 100);
+    camera.position.set(0, 0.4, 3.8);
+
+    // Orbit
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping   = true;
+    controls.dampingFactor   = 0.07;
+    controls.minDistance     = 0.4;
+    controls.maxDistance     = 10;
+    controls.autoRotate      = true;
+    controls.autoRotateSpeed = 1.6;
+    controls.enablePan       = false;
+
+    // Pause auto-rotate on drag, resume after 3s
+    let resumeTimer;
+    canvas.addEventListener('pointerdown', () => {
+      controls.autoRotate = false;
+      clearTimeout(resumeTimer);
+    });
+    canvas.addEventListener('pointerup', () => {
+      resumeTimer = setTimeout(() => { controls.autoRotate = true; }, 3000);
+    });
+
+    // ── Lighting: studio setup for brushed stainless ──
+    // Key light — warm top
+    const key = new THREE.DirectionalLight(0xfff8f0, 4.0);
+    key.position.set(3, 8, 5);
+    key.castShadow = true;
+    key.shadow.mapSize.set(1024, 1024);
+    scene.add(key);
+
+    // Rim — cool blue back-left
+    const rim = new THREE.DirectionalLight(0xa8c4e0, 2.2);
+    rim.position.set(-4, 3, -5);
+    scene.add(rim);
+
+    // Fill — soft warm front-low
+    const fill = new THREE.DirectionalLight(0xffe0c0, 0.8);
+    fill.position.set(2, -2, 4);
+    scene.add(fill);
+
+    // Under — subtle bounce
+    const under = new THREE.DirectionalLight(0x8899aa, 0.6);
+    under.position.set(0, -6, 2);
+    scene.add(under);
+
+    // Ambient
+    scene.add(new THREE.AmbientLight(0x404040, 1.4));
+
+    // Environment map from scene lights (gives reflections on metalness)
+    const pmrem    = new THREE.PMREMGenerator(renderer);
+    const envScene = new THREE.RoomEnvironment();
+    const envMap   = pmrem.fromScene(envScene, 0.04);
+    scene.environment = envMap.texture;
+    pmrem.dispose();
+
+    // ── Load GLB ─────────────────────────────────────
+    const loader = new GLTFLoader();
+
+    try {
+      const gltf = await new Promise((resolve, reject) => {
+        loader.load(modelPath, resolve, undefined, reject);
+      });
+
+      const model = gltf.scene;
+
+      // Center and normalize scale
+      const box    = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      const size   = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale  = 2.2 / maxDim;
+
+      model.position.copy(center.multiplyScalar(-scale));
+      model.scale.setScalar(scale);
+
+      // Apply brushed stainless PBR to every mesh
+      model.traverse(node => {
+        if (!node.isMesh) return;
+        node.castShadow    = true;
+        node.receiveShadow = true;
+        node.material = new THREE.MeshStandardMaterial({
+          color:           new THREE.Color(0xb0b0b0), // cool mid-grey steel
+          metalness:       0.96,
+          roughness:       0.30,                       // brushed — not mirror, not matte
+          envMapIntensity: 1.6,
+        });
+      });
+
+      scene.add(model);
+
+      // Shadow catcher
+      const shadowPlane = new THREE.Mesh(
+        new THREE.PlaneGeometry(8, 8),
+        new THREE.ShadowMaterial({ opacity: 0.15 })
+      );
+      shadowPlane.rotation.x  = -Math.PI / 2;
+      shadowPlane.position.y  = (box.min.y * scale) - 0.02;
+      shadowPlane.receiveShadow = true;
+      scene.add(shadowPlane);
+
+      loading.classList.add('hidden');
+
+    } catch (err) {
+      console.warn('GLB not loaded yet — add your file to /models/:', modelPath, err);
+      loading.classList.add('hidden');
+      noModel.classList.add('visible');
+    }
+
+    // ── Animate ───────────────────────────────────────
+    function tick() {
+      requestAnimationFrame(tick);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    tick();
+
+    // ── Resize ────────────────────────────────────────
+    new ResizeObserver(() => {
+      renderer.setSize(W(), H());
+      camera.aspect = W() / H();
+      camera.updateProjectionMatrix();
+    }).observe(panel);
+  }
+</script>
+
+</body>
+</html>

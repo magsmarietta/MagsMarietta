@@ -147,37 +147,8 @@
       <div class="panel panel--inventory">
         <div class="panel-title"><img src="images/icon-featured.gif" alt="" class="panel-icon"> Inventory</div>
         <div class="panel-body">
-          <div class="product-grid">
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Skull Tag</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Mace Tag</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Spirit Tag</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Ring</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Aglet</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$3.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Jump Ring</div>
-            </div>
+          <div class="product-grid" id="inventory-grid">
+            <!-- Populated by products.js -->
           </div>
         </div>
       </div>
@@ -186,22 +157,8 @@
       <div class="panel">
         <div class="panel-title"><img src="images/icon-deals.webp" alt="" class="panel-icon"> Great Deals</div>
         <div class="panel-body appraisal-text">
-          <div class="product-grid">
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Deal 1</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Deal 2</div>
-            </div>
-            <div class="product-card">
-              <div class="product-price">$30.00</div>
-              <div class="pixel-art-slot"><span>pixel art</span></div>
-              <div class="product-label">Deal 3</div>
-            </div>
+          <div class="product-grid" id="deals-grid">
+            <!-- Populated by products.js — shows first 3 products as deals -->
           </div>
         </div>
       </div>
@@ -217,6 +174,39 @@
 
 </div>
 
+<script src="products.js"></script>
 <script src="main.js"></script>
+<script>
+// ── Populate product grids from products.js ───────────
+(function () {
+  if (typeof PRODUCTS === 'undefined') return;
+
+  function makeCard(p) {
+    const card = document.createElement('a');
+    card.className  = 'product-card';
+    card.href       = `product.html?id=${p.id}`;
+    card.title      = p.name;
+    card.style.cssText = 'display:block;text-decoration:none;color:inherit;overflow:visible;position:relative;';
+
+    const imgHTML = p.thumbnail
+      ? `<img src="${p.thumbnail}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);">`
+      : `<div class="pixel-art-slot"><span>pixel art</span></div>`;
+
+    card.innerHTML = `
+      <div class="product-price">$${p.price.toFixed(2)}</div>
+      ${imgHTML}
+      <div class="product-label">${p.name}</div>`;
+    return card;
+  }
+
+  // Inventory — all products
+  const invGrid = document.getElementById('inventory-grid');
+  if (invGrid) PRODUCTS.forEach(p => invGrid.appendChild(makeCard(p)));
+
+  // Deals — first 3 products (swap IDs to curate)
+  const dealsGrid = document.getElementById('deals-grid');
+  if (dealsGrid) PRODUCTS.slice(0, 3).forEach(p => dealsGrid.appendChild(makeCard(p)));
+})();
+</script>
 </body>
 </html>
