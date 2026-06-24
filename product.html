@@ -482,8 +482,9 @@
 <!-- Product page logic + 3D viewer -->
 <script type="module">
   import * as THREE from 'three';
-  import { GLTFLoader }    from 'three/addons/loaders/GLTFLoader.js';
-  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { GLTFLoader }      from 'three/addons/loaders/GLTFLoader.js';
+  import { OrbitControls }   from 'three/addons/controls/OrbitControls.js';
+  import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
   // ── 1. Resolve product from URL ──────────────────────
   const params  = new URLSearchParams(window.location.search);
@@ -680,7 +681,7 @@
 
     // Environment map from scene lights (gives reflections on metalness)
     const pmrem    = new THREE.PMREMGenerator(renderer);
-    const envScene = new THREE.RoomEnvironment();
+    const envScene = new RoomEnvironment();
     const envMap   = pmrem.fromScene(envScene, 0.04);
     scene.environment = envMap.texture;
     pmrem.dispose();
