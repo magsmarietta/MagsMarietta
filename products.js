@@ -76,7 +76,7 @@ const PRODUCTS = [
     thumbnail:   null,
     inventory:   true,
     deal:        true
-  }
+  },
   {
     id:          "desert-eagle",
     name:        "Desert Eagle",
