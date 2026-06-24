@@ -246,7 +246,7 @@
   const grid = document.getElementById('featured-grid');
   if (!grid) return;
 
-  PRODUCTS.forEach(p => {
+  PRODUCTS.filter(p => p.featured).forEach(p => {
     const card = document.createElement('a');
     card.className = 'product-card';
     card.href      = `product.html?id=${p.id}`;

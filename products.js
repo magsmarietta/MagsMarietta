@@ -15,7 +15,8 @@ const PRODUCTS = [
     model:       "models/skull-tag.glb",
     thumbnail:   null,
     inventory:   true,  // ← shows in Inventory
-    deal:        false   // ← shows in Great Deals
+    deal:        false,  // ← shows in Great Deals
+    featured:    true    // ← shows in Featured Items on index
   },
   {
     id:          "mace-tag",
@@ -27,7 +28,8 @@ const PRODUCTS = [
     model:       "models/mace-tag.glb",
     thumbnail:   null,
     inventory:   true,
-    deal:        false
+    deal:        false,
+    featured:    true
   },
   {
     id:          "spirit-tag",
@@ -39,7 +41,8 @@ const PRODUCTS = [
     model:       "models/spirit-tag.glb",
     thumbnail:   null,
     inventory:   true,
-    deal:        false
+    deal:        false,
+    featured:    true
   },
   {
     id:          "ring",
@@ -51,7 +54,8 @@ const PRODUCTS = [
     model:       "models/ring.glb",
     thumbnail:   null,
     inventory:   true,
-    deal:        false
+    deal:        false,
+    featured:    true
   },
   {
     id:          "aglet",
@@ -63,7 +67,8 @@ const PRODUCTS = [
     model:       "models/aglet.glb",
     thumbnail:   null,
     inventory:   true,
-    deal:        false
+    deal:        false,
+    featured:    true
   },
   {
     id:          "jump-ring",
@@ -74,8 +79,9 @@ const PRODUCTS = [
     details:     ["316L Stainless Steel", "Polished finish", "8mm inner diameter", "2mm wire gauge"],
     model:       "models/jump-ring.glb",
     thumbnail:   null,
-    inventory:   true,
-    deal:        true
+    inventory:   false,
+    deal:        true,
+    featured:    false
   },
   {
     id:          "desert-eagle",
@@ -87,7 +93,8 @@ const PRODUCTS = [
     model:       "models/desert-eagle.glb",
     thumbnail:   null,
     inventory:   false,
-    deal:        true
+    deal:        true,
+    featured:    true
   }
 ];
 
