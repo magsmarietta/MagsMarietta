@@ -13,7 +13,9 @@ const PRODUCTS = [
     description: "Cast 316L stainless steel zipper tag. Skull face, hollow eyes. Heavy enough to feel intentional — light enough to not drag.",
     details:     ["316L Stainless Steel", "Brushed finish", "Fits #5 YKK & standard zippers", "Approx. 2.8cm × 1.8cm"],
     model:       "models/skull-tag.glb",
-    thumbnail:   null   // replace with "images/skull-tag.webp" once you have photos
+    thumbnail:   null,
+    inventory:   true,  // ← shows in Inventory
+    deal:        false   // ← shows in Great Deals
   },
   {
     id:          "mace-tag",
@@ -23,7 +25,9 @@ const PRODUCTS = [
     description: "Mace-head zipper pull. Sharp geometry, heavy presence. Machined from solid stainless stock.",
     details:     ["316L Stainless Steel", "Brushed finish", "Fits #5 YKK & standard zippers", "Approx. 3.2cm × 1.4cm"],
     model:       "models/mace-tag.glb",
-    thumbnail:   null
+    thumbnail:   null,
+    inventory:   true,
+    deal:        false
   },
   {
     id:          "spirit-tag",
@@ -33,7 +37,9 @@ const PRODUCTS = [
     description: "Ghost-form zipper tag. Fluid silhouette cut from stainless plate. Hangs with intention.",
     details:     ["316L Stainless Steel", "Brushed finish", "Fits #5 YKK & standard zippers", "Approx. 3.0cm × 1.6cm"],
     model:       "models/spirit-tag.glb",
-    thumbnail:   null
+    thumbnail:   null,
+    inventory:   true,
+    deal:        false
   },
   {
     id:          "ring",
@@ -43,7 +49,9 @@ const PRODUCTS = [
     description: "Solid stainless band. No coating, no plating. The brushed finish deepens with wear.",
     details:     ["316L Stainless Steel", "Brushed finish", "Sized to order — DM for sizing", "8mm band width"],
     model:       "models/ring.glb",
-    thumbnail:   null
+    thumbnail:   null,
+    inventory:   true,
+    deal:        false
   },
   {
     id:          "aglet",
@@ -53,7 +61,9 @@ const PRODUCTS = [
     description: "Cold-formed stainless aglets. Replace the plastic tips on laces, cords, drawstrings. Built to outlast the shoe.",
     details:     ["316L Stainless Steel", "Brushed finish", "Fits 3–5mm cord", "Sold as a pair"],
     model:       "models/aglet.glb",
-    thumbnail:   null
+    thumbnail:   null,
+    inventory:   true,
+    deal:        false
   },
   {
     id:          "jump-ring",
@@ -63,7 +73,21 @@ const PRODUCTS = [
     description: "Heavy-gauge stainless jump rings. For connecting, layering, customizing. Sold individually.",
     details:     ["316L Stainless Steel", "Polished finish", "8mm inner diameter", "2mm wire gauge"],
     model:       "models/jump-ring.glb",
-    thumbnail:   null
+    thumbnail:   null,
+    inventory:   true,
+    deal:        true
+  }
+  {
+    id:          "desert-eagle",
+    name:        "Desert Eagle",
+    price:       18.00,
+    category:    "Zipper Tag",
+    description: "...",
+    details:     ["316L Stainless Steel", "Brushed finish", "Fits #5 YKK & standard zippers", "Approx. 3.2cm × 1.4cm"],
+    model:       "models/desert-eagle.glb",
+    thumbnail:   null,
+    inventory:   false,
+    deal:        true
   }
 ];
 
