@@ -203,9 +203,9 @@
   const invGrid = document.getElementById('inventory-grid');
   if (invGrid) PRODUCTS.forEach(p => invGrid.appendChild(makeCard(p)));
 
-  // Deals — first 3 products (swap IDs to curate)
+  // Deals — only products with deal: true
   const dealsGrid = document.getElementById('deals-grid');
-  if (dealsGrid) PRODUCTS.slice(0, 3).forEach(p => dealsGrid.appendChild(makeCard(p)));
+  if (dealsGrid) PRODUCTS.filter(p => p.deal).forEach(p => dealsGrid.appendChild(makeCard(p)));
 })();
 </script>
 </body>
