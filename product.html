@@ -123,27 +123,19 @@
   background: var(--panel-side);
 }
 
+/* ── Product app container — matches #main-content gap ── */
+#product-app {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 /* ── Product Info ─────────────────────────────────────── */
 .product-info-panel {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
-/* Breadcrumb */
-.breadcrumb {
-  font-family: var(--font-body);
-  font-size: 11px;
-  color: var(--gray-dark);
-  letter-spacing: 0.5px;
-  padding: 6px 10px;
-}
-.breadcrumb a {
-  color: var(--gray-dark);
-  text-decoration: none;
-}
-.breadcrumb a:hover { color: var(--black); text-decoration: underline; }
-.breadcrumb .sep { margin: 0 4px; }
 
 /* Name & Price header block */
 .product-name-block {
@@ -521,17 +513,6 @@
   // ── 3. Render full product page ──────────────────────
   function renderProduct(p) {
     app.innerHTML = `
-
-      <!-- Breadcrumb -->
-      <div class="panel">
-        <div class="panel-body breadcrumb">
-          <a href="index.html">Home</a>
-          <span class="sep">&rsaquo;</span>
-          <a href="shop.html">Shop</a>
-          <span class="sep">&rsaquo;</span>
-          ${p.name}
-        </div>
-      </div>
 
       <!-- 3D Viewer -->
       <div class="panel panel--inventory viewer-panel">
