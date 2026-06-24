@@ -79,7 +79,7 @@ const PRODUCTS = [
     details:     ["316L Stainless Steel", "Polished finish", "8mm inner diameter", "2mm wire gauge"],
     model:       "models/jump-ring.glb",
     thumbnail:   null,
-    inventory:   false,
+    inventory:   true,
     deal:        true,
     featured:    false
   },
