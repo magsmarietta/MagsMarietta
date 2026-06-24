@@ -199,9 +199,9 @@
     return card;
   }
 
-  // Inventory — all products
+  // Inventory — only products with inventory: true
   const invGrid = document.getElementById('inventory-grid');
-  if (invGrid) PRODUCTS.forEach(p => invGrid.appendChild(makeCard(p)));
+  if (invGrid) PRODUCTS.filter(p => p.inventory).forEach(p => invGrid.appendChild(makeCard(p)));
 
   // Deals — only products with deal: true
   const dealsGrid = document.getElementById('deals-grid');
