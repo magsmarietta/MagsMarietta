@@ -75,7 +75,7 @@ const PRODUCTS = [
     name:        "Jump Ring",
     price:       3.00,
     category:    "Hardware",
-    description: "Heavy-gauge stainless jump rings. For connecting, layering, customizing. Sold individually.",
+    description: "Heavy-gauge stainless jump rings. For connecting, layering, customizing. Sold as pack of 4.",
     details:     ["316L Stainless Steel", "Polished finish", "Pack of 4", "..."],
     model:       "models/jump-ring.glb",
     thumbnail:   null,
