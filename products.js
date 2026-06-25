@@ -76,7 +76,7 @@ const PRODUCTS = [
     price:       3.00,
     category:    "Hardware",
     description: "Heavy-gauge stainless jump rings. For connecting, layering, customizing. Sold individually.",
-    details:     ["316L Stainless Steel", "Polished finish", "8mm inner diameter", "2mm wire gauge"],
+    details:     ["316L Stainless Steel", "Polished finish", "Pack of 4", "..."],
     model:       "models/jump-ring.glb",
     thumbnail:   null,
     inventory:   true,
