@@ -45,13 +45,13 @@ const PRODUCTS = [
     featured:    true
   },
   {
-    id:          "ring",
-    name:        "Ring",
+    id:          "flower-ring",
+    name:        "Flower Ring",
     price:       30.00,
     category:    "Jewelry",
-    description: "Solid stainless band. No coating, no plating. The brushed finish deepens with wear.",
+    description: "Solid stainless band.",
     details:     ["316L Stainless Steel", "Polished finish", "See chart for sizing", "..."],
-    model:       "models/ring.glb",
+    model:       "models/flower-ring.glb",
     thumbnail:   null,
     inventory:   true,
     deal:        false,
