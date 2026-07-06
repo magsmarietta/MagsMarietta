@@ -48,7 +48,7 @@ const PRODUCTS = [
     id:          "flower-ring",
     name:        "Flower Ring",
     price:       30.00,
-    category:    "Jewelry",
+    category:    "Ring",
     description: "Solid stainless band.",
     details:     ["316L Stainless Steel", "Polished finish", "See chart for sizing", "..."],
     model:       "models/flower-ring.glb",
