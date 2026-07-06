@@ -100,6 +100,36 @@
   width: 100%;
 }
 
+/* ===== PRODUCT PAGE MOBILE ===== */
+
+.product-page .product-status-panel,
+.product-page .product-tags-panel {
+  display: none;
+}
+
+.product-page #page-wrap,
+.product-page .product-page-wrap {
+  grid-template-columns: 1fr;
+}
+
+.product-page #sidebar {
+  width: 100%;
+}
+
+.product-page .nav-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.product-page .nav-links a {
+  width: 100%;
+}
+
+.product-page #main-content {
+  width: 100%;
+}
+
 .status-cell {
   flex-wrap: nowrap;
   gap: 8px;
