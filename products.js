@@ -34,7 +34,8 @@ const PRODUCTS = [
     thumbnail:   null,
     photos:      [
       "images/products/mace-tag/1.jpg",
-      "images/products/mace-tag/2.jpg"
+      "images/products/mace-tag/2.jpg",
+      "images/products/mace-tag/3.jpg"
     ],
     inventory:   true,
     deal:        false,
@@ -52,8 +53,7 @@ const PRODUCTS = [
     photos:      [
       "images/products/spirit-tag/1.jpg",
       "images/products/spirit-tag/2.jpg",
-      "images/products/spirit-tag/3.jpg",
-      "images/products/spirit-tag/4.jpg"
+      "images/products/spirit-tag/3.jpg"
     ],
     inventory:   true,
     deal:        false,
@@ -88,7 +88,8 @@ const PRODUCTS = [
     thumbnail:   null,
     photos:      [
       "images/products/aglet/1.jpg",
-      "images/products/aglet/2.jpg"
+      "images/products/aglet/2.jpg",
+      "images/products/aglet/3.jpg"
     ],
     inventory:   true,
     deal:        false,
@@ -106,9 +107,7 @@ const PRODUCTS = [
     photos:      [
       "images/products/jump-ring/1.jpg",
       "images/products/jump-ring/2.jpg",
-      "images/products/jump-ring/3.jpg",
-      "images/products/jump-ring/4.jpg",
-      "images/products/jump-ring/5.jpg"
+      "images/products/jump-ring/3.jpg"
     ],
     inventory:   true,
     deal:        true,
