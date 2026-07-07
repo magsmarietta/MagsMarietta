@@ -270,6 +270,48 @@
   letter-spacing: 1px;
 }
 
+/* Size selector (rings only) */
+.size-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--gray-dark);
+  letter-spacing: 1px;
+  transition: color 0.15s;
+}
+.size-label.flash { color: #cc0000; }
+
+.size-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.size-btn {
+  background: var(--panel-side);
+  border-top:    2px solid var(--border-tl);
+  border-left:   2px solid var(--border-tl);
+  border-right:  2px solid var(--border-br);
+  border-bottom: 3px solid var(--border-br);
+  border-radius: 4px;
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 12px;
+  width: 32px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  transition: background 0.1s, color 0.1s;
+}
+.size-btn:hover { background: var(--gray-mid); }
+.size-btn.active {
+  background: var(--black);
+  color: var(--white);
+}
+
 .btn-add-cart {
   font-family: var(--font-body);
   font-size: 12px;
@@ -421,7 +463,7 @@
         <div class="panel-body">
           <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="shop.html">Back</a></li>
+            <li><a href="shop.html">Shop</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="index.html#contact-panel">Contact</a></li>
           </ul>
@@ -562,6 +604,14 @@
           <hr class="divider">
 
           <div class="cta-block" style="padding:0;">
+            ${p.category === 'Ring' ? `
+            <div class="size-label" id="size-label">SIZE</div>
+            <div class="size-row" id="size-row">
+              ${Array.from({length: 13}, (_, i) => i + 1).map(s =>
+                `<button class="size-btn" data-size="${s}">${s}</button>`
+              ).join('')}
+            </div>
+            ` : ''}
             <div class="qty-label">QTY</div>
             <div class="qty-row">
               <button class="qty-btn" id="qty-minus">−</button>
@@ -578,6 +628,20 @@
         </div>
       </div>`;
 
+    // Size selection (rings only)
+    let selectedSize = null;
+    const sizeRow = document.getElementById('size-row');
+    if (sizeRow) {
+      sizeRow.addEventListener('click', (e) => {
+        const btn = e.target.closest('.size-btn');
+        if (!btn) return;
+        sizeRow.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedSize = btn.dataset.size;
+        document.getElementById('size-label').classList.remove('flash');
+      });
+    }
+
     // Quantity
     let qty = 1;
     document.getElementById('qty-minus').addEventListener('click', () => {
@@ -589,6 +653,12 @@
 
     // Add to cart
     document.getElementById('btn-add').addEventListener('click', () => {
+      if (sizeRow && !selectedSize) {
+        const label = document.getElementById('size-label');
+        label.classList.add('flash');
+        label.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
       const btn = document.getElementById('btn-add');
       btn.textContent = '✓ ADDED';
       btn.classList.add('added');
@@ -596,7 +666,7 @@
         btn.textContent = 'ADD TO CART';
         btn.classList.remove('added');
       }, 2000);
-      console.log('Cart:', { id: p.id, qty });
+      console.log('Cart:', { id: p.id, qty, size: selectedSize });
       // TODO: wire to your cart / Payhip / checkout
     });
 
