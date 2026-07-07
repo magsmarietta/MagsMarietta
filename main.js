@@ -130,24 +130,24 @@ function handleEmailSubmit(btn) {
       });
     }
 
-   tag.addEventListener('click', function () {
-     const isActive = this.classList.contains('active');
-     if (isActive) {
-       this.classList.remove('active');
-       currentColor = null;
-       this.style.background = '';
-       this.style.color = '';
-       this.style.borderColor = '';
-     } else {
-       if (!currentColor) {
-         currentColor = colors[Math.floor(Math.random() * colors.length)];
-       }
-       this.classList.add('active');
-       this.style.background = 'var(--white)';
-       this.style.color = currentColor;
-       this.style.borderColor = currentColor;
-     }
-   });
+    tag.addEventListener('click', function () {
+      const isActive = this.classList.contains('active');
+      if (isActive) {
+        this.classList.remove('active');
+        currentColor = null;
+        this.style.background = '';
+        this.style.color = '';
+        this.style.borderColor = '';
+      } else {
+        if (!currentColor) {
+          currentColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+        this.classList.add('active');
+        this.style.background = 'var(--white)';
+        this.style.color = currentColor;
+        this.style.borderColor = currentColor;
+      }
+    });
   });
 })();
 
