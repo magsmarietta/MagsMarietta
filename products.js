@@ -14,6 +14,11 @@ const PRODUCTS = [
     details:     ["316L Stainless Steel", "Polished finish", "Fits #5 YKK & standard zippers", "Approx. 7.4cm × 32.2cm"],
     model:       "models/skull-tag.glb",
     thumbnail:   null,
+    photos:      [
+      "images/products/skull-tag/1.jpg",
+      "images/products/skull-tag/2.jpg",
+      "images/products/skull-tag/3.jpg"
+    ],
     inventory:   true,  // ← shows in Inventory
     deal:        false,  // ← shows in Great Deals
     featured:    true    // ← shows in Featured Items on index
@@ -27,6 +32,10 @@ const PRODUCTS = [
     details:     ["316L Stainless Steel", "Polished finish", "Fits #5 YKK & standard zippers", "Approx. 16.6cm × 42.0cm"],
     model:       "models/mace-tag.glb",
     thumbnail:   null,
+    photos:      [
+      "images/products/mace-tag/1.jpg",
+      "images/products/mace-tag/2.jpg"
+    ],
     inventory:   true,
     deal:        false,
     featured:    true
@@ -40,6 +49,12 @@ const PRODUCTS = [
     details:     ["316L Stainless Steel", "Polished finish", "Fits #5 YKK & standard zippers", "Approx. 25.2cm × 29.8cm"],
     model:       "models/spirit-tag.glb",
     thumbnail:   null,
+    photos:      [
+      "images/products/spirit-tag/1.jpg",
+      "images/products/spirit-tag/2.jpg",
+      "images/products/spirit-tag/3.jpg",
+      "images/products/spirit-tag/4.jpg"
+    ],
     inventory:   true,
     deal:        false,
     featured:    true
@@ -53,6 +68,11 @@ const PRODUCTS = [
     details:     ["316L Stainless Steel", "Polished finish", "See chart for sizing", "..."],
     model:       "models/flower-ring.glb",
     thumbnail:   null,
+    photos:      [
+      "images/products/flower-ring/1.jpg",
+      "images/products/flower-ring/2.jpg",
+      "images/products/flower-ring/3.jpg"
+    ],
     inventory:   true,
     deal:        false,
     featured:    true
@@ -66,6 +86,10 @@ const PRODUCTS = [
     details:     ["316L Stainless Steel", "Polished finish", "Fits 3–5mm cord", "Sold as a pair"],
     model:       "models/aglet.glb",
     thumbnail:   null,
+    photos:      [
+      "images/products/aglet/1.jpg",
+      "images/products/aglet/2.jpg"
+    ],
     inventory:   true,
     deal:        false,
     featured:    true
@@ -79,6 +103,13 @@ const PRODUCTS = [
     details:     ["316L Stainless Steel", "Polished finish", "Pack of 4", "..."],
     model:       "models/jump-ring.glb",
     thumbnail:   null,
+    photos:      [
+      "images/products/jump-ring/1.jpg",
+      "images/products/jump-ring/2.jpg",
+      "images/products/jump-ring/3.jpg",
+      "images/products/jump-ring/4.jpg",
+      "images/products/jump-ring/5.jpg"
+    ],
     inventory:   true,
     deal:        true,
     featured:    false
@@ -92,6 +123,11 @@ const PRODUCTS = [
     details:     ["316L Stainless Steel", "Polished finish", "Fits #5 YKK & standard zippers", "Approx. 29.0cm × 20.2cm"],
     model:       "models/desert-eagle.glb",
     thumbnail:   null,
+    photos:      [
+      "images/products/desert-eagle/1.jpg",
+      "images/products/desert-eagle/2.jpg",
+      "images/products/desert-eagle/3.jpg"
+    ],
     inventory:   false,
     deal:        true,
     featured:    true

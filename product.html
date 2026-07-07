@@ -122,6 +122,48 @@
   letter-spacing: 0.5px;
   background: var(--panel-side);
 }
+.viewer-hint.photo-nav-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 8px;
+}
+
+/* 3D / Photos toggle switch — sits top-right of the Preview panel title */
+.viewer-toggle {
+  margin-left: auto;
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.viewer-toggle-btn {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  line-height: 1;
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+.viewer-toggle-btn:hover { background: rgba(255,255,255,0.2); }
+.viewer-toggle-btn.active {
+  background: var(--white);
+  color: var(--title-mid);
+}
+
+/* Photo slideshow image (placeholder shown via .no-model on error) */
+.photo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
 
 /* ── Product app container — matches #main-content gap ── */
 #product-app {
@@ -557,12 +599,18 @@
   function renderProduct(p) {
     app.innerHTML = `
 
-      <!-- 3D Viewer -->
+      <!-- 3D Viewer / Photo Slideshow -->
       <div class="panel panel--inventory viewer-panel">
         <div class="panel-title">
-          <img src="images/icon-preview.gif" alt="" class="panel-icon"> Preview
+          <img src="images/icon-featured.gif" alt="" class="panel-icon"> Preview
+          <div class="viewer-toggle" id="viewer-toggle">
+            <button class="viewer-toggle-btn active" data-mode="3d">3D</button>
+            <button class="viewer-toggle-btn" data-mode="photos">PHOTOS</button>
+          </div>
         </div>
-        <div class="viewer-aspect">
+
+        <!-- 3D VIEW -->
+        <div class="viewer-aspect" id="viewer-3d">
           <canvas id="viewer-canvas"></canvas>
           <div class="viewer-loading" id="viewer-loading">
             <div class="loader-ring"></div>
@@ -573,7 +621,19 @@
             <div class="no-model-label">3D MODEL<br>COMING SOON</div>
           </div>
         </div>
-        <div class="viewer-hint">Interactive View - DRAG to rotate & SCROLL to zoom</div>
+
+        <!-- PHOTO SLIDESHOW -->
+        <div class="viewer-aspect" id="viewer-photos" style="display:none;"></div>
+
+        <!-- HINT / NAV BARS -->
+        <div class="viewer-hint" id="viewer-hint-3d">Interactive View - DRAG to rotate &amp; SCROLL to zoom</div>
+        <div class="viewer-hint photo-nav-bar" id="viewer-hint-photos" style="display:none;">
+          <div class="qty-row">
+            <button class="qty-btn" id="photo-prev">‹</button>
+            <div class="qty-val" id="photo-count" style="width:48px;">1 / 1</div>
+            <button class="qty-btn" id="photo-next">›</button>
+          </div>
+        </div>
       </div>
 
       <!-- Product Info -->
@@ -668,6 +728,56 @@
       }, 2000);
       console.log('Cart:', { id: p.id, qty, size: selectedSize });
       // TODO: wire to your cart / Payhip / checkout
+    });
+
+    // Preview mode toggle (3D / Photos)
+    const toggleBtns = document.querySelectorAll('#viewer-toggle .viewer-toggle-btn');
+    const view3d      = document.getElementById('viewer-3d');
+    const viewPhotos  = document.getElementById('viewer-photos');
+    const hint3d      = document.getElementById('viewer-hint-3d');
+    const hintPhotos  = document.getElementById('viewer-hint-photos');
+
+    toggleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('active')) return;
+        toggleBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const showPhotos = btn.dataset.mode === 'photos';
+        view3d.style.display     = showPhotos ? 'none' : '';
+        viewPhotos.style.display = showPhotos ? '' : 'none';
+        hint3d.style.display     = showPhotos ? 'none' : '';
+        hintPhotos.style.display = showPhotos ? '' : 'none';
+      });
+    });
+
+    // Photo slideshow — driven entirely by p.photos in products.js.
+    // Reorder that array to change photo order; add/remove entries to
+    // change the count. Once real image files exist at those paths
+    // they'll display automatically — until then it falls back to a
+    // "PHOTO n" placeholder.
+    const photos = (p.photos && p.photos.length) ? p.photos : ['placeholder'];
+    let photoIndex = 0;
+
+    function renderPhoto() {
+      const n = photoIndex + 1;
+      viewPhotos.innerHTML = `
+        <img class="photo-img" src="${photos[photoIndex]}" alt="${p.name} photo ${n}"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="no-model">
+          <div class="no-model-icon">🖼</div>
+          <div class="no-model-label">PHOTO ${n}</div>
+        </div>`;
+      document.getElementById('photo-count').textContent = `${n} / ${photos.length}`;
+    }
+    renderPhoto();
+
+    document.getElementById('photo-prev').addEventListener('click', () => {
+      photoIndex = (photoIndex - 1 + photos.length) % photos.length;
+      renderPhoto();
+    });
+    document.getElementById('photo-next').addEventListener('click', () => {
+      photoIndex = (photoIndex + 1) % photos.length;
+      renderPhoto();
     });
 
     // Start viewer
