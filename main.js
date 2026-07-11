@@ -55,7 +55,7 @@ function handleEmailSubmit(btn) {
   const val   = input.value.trim();
 
   if (!val || !val.includes('@')) {
-    note.textContent = '// ENTER A VALID EMAIL ADDRESS.';
+    note.textContent = 'ENTER A VALID EMAIL ADDRESS...';
     note.style.color = '#cc0000';
     return;
   }
