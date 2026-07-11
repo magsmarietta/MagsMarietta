@@ -59,11 +59,11 @@ function handleEmailSubmit(btn) {
     note.style.color = '#cc0000';
     return;
   }
-  btn.textContent       = '✓ SENT';
+  btn.textContent       = 'SENT';
   btn.style.background  = '#222';
   input.value           = '';
   input.placeholder     = "YOU'RE ON THE LIST.";
-  note.textContent      = '// WELCOME TO THE INNER CIRCLE.';
+  note.textContent      = '';
   note.style.color      = '#228B22';
 }
 
