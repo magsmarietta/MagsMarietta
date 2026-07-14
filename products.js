@@ -78,18 +78,18 @@ const PRODUCTS = [
     featured:    true
   },
   {
-    id:          "aglet",
-    name:        "Aglet",
+    id:          "engraved-ring",
+    name:        "Engraved Ring",
     price:       30.00,
-    category:    "Hardware",
-    description: "Cold-formed stainless aglets. Replace the plastic tips on laces, cords, drawstrings. Built to outlast the shoe.",
-    details:     ["316L Stainless Steel", "Polished finish", "Fits 3–5mm cord", "Sold as a pair"],
-    model:       "models/aglet.glb",
+    category:    "Ring",
+    description: "...",
+    details:     ["316L Stainless Steel", "Polished finish", "...", "..."],
+    model:       "models/engraved-ring.glb",
     thumbnail:   null,
     photos:      [
-      "images/products/aglet/1.jpg",
-      "images/products/aglet/2.jpg",
-      "images/products/aglet/3.jpg"
+      "images/products/engraved-ring/1.jpg",
+      "images/products/engraved-ring/2.jpg",
+      "images/products/engraved-ring/3.jpg"
     ],
     inventory:   true,
     deal:        false,
