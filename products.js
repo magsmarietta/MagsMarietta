@@ -82,8 +82,8 @@ const PRODUCTS = [
     name:        "Engraved Ring",
     price:       30.00,
     category:    "Ring",
-    description: "...",
-    details:     ["316L Stainless Steel", "Polished finish", "...", "..."],
+    description: "Solid stainless band.",
+    details:     ["316L Stainless Steel", "Polished finish", "See chart for sizing", "..."],
     model:       "models/engraved-ring.glb",
     thumbnail:   null,
     photos:      [
