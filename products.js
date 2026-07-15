@@ -82,14 +82,14 @@ const PRODUCTS = [
     name:        "Etched Ring",
     price:       30.00,
     category:    "Ring",
-    description: "Solid stainless engraved band featuring a skull.",
+    description: "Solid stainless signet band featuring a skull.",
     details:     ["316L Stainless Steel", "Polished finish", "See chart for sizing", "..."],
-    model:       "models/engraved-ring.glb",
+    model:       "models/etched-ring.glb",
     thumbnail:   null,
     photos:      [
-      "images/products/engraved-ring/1.jpg",
-      "images/products/engraved-ring/2.jpg",
-      "images/products/engraved-ring/3.jpg"
+      "images/products/etched-ring/1.jpg",
+      "images/products/etched-ring/2.jpg",
+      "images/products/etched-ring/3.jpg"
     ],
     inventory:   true,
     deal:        false,
