@@ -119,7 +119,7 @@ const PRODUCTS = [
     price:       18.00,
     category:    "Zipper Pull",
     description: "...",
-    details:     ["316L Stainless Steel", "Polished finish", "Fits #5 YKK & standard zippers", "Approx. 29.0cm × 20.2cm"],
+    details:     ["316L Stainless Steel", "Polished finish", "Fits all zippers", "Approx. 29.0cm × 20.2cm"],
     model:       "models/desert-eagle.glb",
     thumbnail:   null,
     photos:      [
