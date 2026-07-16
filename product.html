@@ -740,7 +740,14 @@
         btn.textContent = 'ADD TO CART';
         btn.classList.remove('added');
       }, 2000);
-      addToCart(p.id, p.name, qty);
+      addToCart({
+        id:       selectedSize ? `${p.id}-${selectedSize}` : p.id,
+        name:     p.name,
+        price:    p.price,
+        category: p.category,
+        size:     selectedSize || null,
+        qty:      qty
+      });
     });
 
     // Preview mode toggle (3D / Photos)

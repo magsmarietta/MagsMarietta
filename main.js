@@ -97,15 +97,22 @@ function saveCart(cart) {
   try { localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart)); } catch (e) {}
 }
 
-// Adds `qty` of an item to the cart (stacks onto an existing entry by id)
-function addToCart(id, name, qty) {
-  qty = qty || 1;
+// Adds an item to the cart (stacks qty onto an existing entry with the same id)
+// item: { id, name, price, category, size, qty }
+function addToCart(item) {
   const cart = getCart();
-  const existing = cart.find(item => item.id === id);
+  const existing = cart.find(i => i.id === item.id);
   if (existing) {
-    existing.qty += qty;
+    existing.qty += item.qty || 1;
   } else {
-    cart.push({ id: id, name: name, qty: qty });
+    cart.push({
+      id:       item.id,
+      name:     item.name,
+      price:    item.price,
+      category: item.category || null,
+      size:     item.size || null,
+      qty:      item.qty || 1
+    });
   }
   saveCart(cart);
   renderCartPanel();
@@ -137,28 +144,52 @@ function renderCartPanel() {
     return;
   }
 
-  body.innerHTML = cart.map(item => `
+  const itemsHTML = cart.map(item => {
+    const metaParts = [item.category, item.size ? `Size ${item.size}` : null].filter(Boolean);
+    return `
     <div class="cart-item-row" data-id="${item.id}">
-      <span class="cart-item-name">${item.name}</span>
+      <div class="cart-item-info">
+        <span class="cart-item-name">${item.name}</span>
+        ${metaParts.length ? `<span class="cart-item-meta">${metaParts.join(' · ')}</span>` : ''}
+        <span class="cart-item-price">$${item.price.toFixed(2)} each</span>
+      </div>
       <div class="cart-item-qty">
         <button class="cart-qty-btn" data-action="minus" data-id="${item.id}" aria-label="Decrease quantity">−</button>
         <span class="cart-qty-val">${item.qty}</span>
         <button class="cart-qty-btn" data-action="plus" data-id="${item.id}" aria-label="Increase quantity">+</button>
       </div>
+    </div>`;
+  }).join('');
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  body.innerHTML = `
+    <div class="cart-items-list">${itemsHTML}</div>
+    <div class="cart-total-row">
+      <span>TOTAL</span>
+      <span>$${total.toFixed(2)}</span>
     </div>
-  `).join('');
+    <button class="cart-checkout-btn" id="cart-checkout-btn">CHECKOUT</button>
+  `;
 }
 
-// Event delegation — cart item rows are re-rendered often, so bind once on document
+// Event delegation — cart contents are re-rendered often, so bind once on document
 document.addEventListener('click', function (e) {
-  const btn = e.target.closest('.cart-qty-btn');
-  if (!btn) return;
-  const id     = btn.dataset.id;
-  const cart   = getCart();
-  const item   = cart.find(i => i.id === id);
-  if (!item) return;
-  const delta  = btn.dataset.action === 'plus' ? 1 : -1;
-  setCartItemQty(id, item.qty + delta);
+  const qtyBtn = e.target.closest('.cart-qty-btn');
+  if (qtyBtn) {
+    const id   = qtyBtn.dataset.id;
+    const cart = getCart();
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    const delta = qtyBtn.dataset.action === 'plus' ? 1 : -1;
+    setCartItemQty(id, item.qty + delta);
+    return;
+  }
+
+  if (e.target.closest('#cart-checkout-btn')) {
+    // TODO: wire to real checkout / Payhip
+    console.log('Checkout clicked. Cart:', getCart());
+  }
 });
 
 renderCartPanel();
