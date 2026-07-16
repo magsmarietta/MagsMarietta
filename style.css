@@ -415,6 +415,16 @@ body {
   user-select: none;
 }
 
+/* CART */
+.cart-empty-msg {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--gray-dark);
+  text-align: center;
+  padding: 10px 0;
+  letter-spacing: 0.5px;
+}
+
 /* ===== MAIN CONTENT ===== */
 #main-content {
   display: flex;

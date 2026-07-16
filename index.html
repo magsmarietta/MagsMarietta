@@ -110,6 +110,18 @@
         </div>
       </div>
 
+      <!-- CART (collapsible) -->
+      <div class="panel" id="cart-panel">
+        <div class="collapsible-header" onclick="toggleLog(this)" role="button" tabindex="0" aria-expanded="false">
+          <span><img src="images/icon-cart.webp" alt="" class="panel-icon"> Cart</span>
+          <span class="toggle-arrow">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <p class="cart-empty-msg">Your cart is empty.</p>
+        </div>
+      </div>
+      <div id="cart-anchor-sidebar" style="display:none;"></div>
+
       <!-- UPDATE LOG (collapsible) -->
       <div class="panel">
         <div class="collapsible-header" onclick="toggleLog(this)" role="button" tabindex="0" aria-expanded="false">
@@ -216,7 +228,7 @@
             />
             <button class="contact-btn" onclick="handleEmailSubmit(this)">ENTER</button>
           </div>
-          <p class="contact-note" id="contact-note"></p>
+          <p class="contact-note" id="contact-note">Thank you for joining!</p>
           <hr class="divider" style="margin-top: 16px;">
           <div style="text-align:center; margin-top:12px;">
           <img src="images/icon-ig.gif" style="height:auto;width:100px;image-rendering:pixelated;display:block;margin:0 auto 8px auto;">
