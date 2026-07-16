@@ -459,7 +459,8 @@ body {
 
 .cart-item-name {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: bold;
   color: var(--black);
   letter-spacing: 0.5px;
   overflow-wrap: break-word;

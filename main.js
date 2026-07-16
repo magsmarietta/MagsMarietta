@@ -145,7 +145,7 @@ function renderCartPanel() {
   }
 
   const itemsHTML = cart.map(item => {
-    const metaParts = [item.category, item.size ? `Size ${item.size}` : null].filter(Boolean);
+    const metaParts = [item.size ? `Size ${item.size}` : null].filter(Boolean);
     return `
     <div class="cart-item-row" data-id="${item.id}">
       <div class="cart-item-info">
