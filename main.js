@@ -63,8 +63,8 @@ function handleEmailSubmit(btn) {
   btn.style.background  = '#222';
   input.value           = '';
   input.placeholder     = "YOU'RE ON THE LIST.";
-  note.textContent      = '';
-  note.style.color      = '#228B22';
+  note.textContent      = 'Thank you for joining!';
+  note.style.color      = '#2c2129';
 }
 
 
