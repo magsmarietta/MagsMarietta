@@ -425,6 +425,83 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* When the cart is displayed as a main panel (mobile, shop/product pages)
+   it's forced open and non-collapsible — this never touches the .open
+   class, so the sidebar collapse/expand state is preserved underneath. */
+.cart-panel--static .collapsible-header {
+  cursor: default;
+  pointer-events: none;
+}
+.cart-panel--static .toggle-arrow {
+  display: none;
+}
+.cart-panel--static .collapsible-body {
+  display: block !important;
+}
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--gray-mid);
+}
+.cart-item-row:last-child { border-bottom: none; }
+
+.cart-item-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--black);
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  letter-spacing: 0.5px;
+}
+
+.cart-item-qty {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-top:    2px solid var(--border-tl);
+  border-left:   2px solid var(--border-tl);
+  border-right:  2px solid var(--border-br);
+  border-bottom: 3px solid var(--border-br);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--panel-main);
+}
+
+.cart-qty-btn {
+  background: var(--panel-side);
+  border: none;
+  color: var(--black);
+  font-family: var(--font-pixel);
+  font-size: 15px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.1s;
+}
+.cart-qty-btn:hover { background: var(--gray-mid); }
+
+.cart-qty-val {
+  font-family: var(--font-body);
+  font-size: 12px;
+  width: 22px;
+  text-align: center;
+  border-left:  1px solid var(--gray-mid);
+  border-right: 1px solid var(--gray-mid);
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ===== MAIN CONTENT ===== */
 #main-content {
   display: flex;

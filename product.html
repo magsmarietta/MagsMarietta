@@ -740,8 +740,7 @@
         btn.textContent = 'ADD TO CART';
         btn.classList.remove('added');
       }, 2000);
-      console.log('Cart:', { id: p.id, qty, size: selectedSize });
-      // TODO: wire to your cart / Payhip / checkout
+      addToCart(p.id, p.name, qty);
     });
 
     // Preview mode toggle (3D / Photos)

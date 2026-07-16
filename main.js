@@ -53,13 +53,24 @@
 
     if (isMobile && isAboutPage) {
       cartPanel.style.display = 'none';
+      cartPanel.classList.remove('cart-panel--static');
       return;
     }
     cartPanel.style.display = '';
 
     if (isMobile && isShopOrProductPage && anchorMain) {
+      // Shown as a main panel: forced open, not collapsible.
+      // This class only controls display — it never touches the
+      // .open class, so the sidebar's collapsed/expanded state
+      // (saved separately) is untouched underneath.
+      cartPanel.classList.add('cart-panel--static');
+      const header = cartPanel.querySelector('.collapsible-header');
+      if (header) header.tabIndex = -1;
       anchorMain.parentNode.insertBefore(cartPanel, anchorMain);
     } else {
+      cartPanel.classList.remove('cart-panel--static');
+      const header = cartPanel.querySelector('.collapsible-header');
+      if (header) header.tabIndex = 0;
       anchorSide.parentNode.insertBefore(cartPanel, anchorSide);
     }
   }
@@ -70,13 +81,104 @@
 })();
 
 
+// ===== CART: DATA MODEL (persisted in localStorage) =====
+const CART_STORAGE_KEY = 'magsCart';
+
+function getCart() {
+  try {
+    const raw = localStorage.getItem(CART_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveCart(cart) {
+  try { localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart)); } catch (e) {}
+}
+
+// Adds `qty` of an item to the cart (stacks onto an existing entry by id)
+function addToCart(id, name, qty) {
+  qty = qty || 1;
+  const cart = getCart();
+  const existing = cart.find(item => item.id === id);
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({ id: id, name: name, qty: qty });
+  }
+  saveCart(cart);
+  renderCartPanel();
+}
+
+// Sets an item's qty directly; qty <= 0 removes it from the cart
+function setCartItemQty(id, qty) {
+  let cart = getCart();
+  if (qty <= 0) {
+    cart = cart.filter(item => item.id !== id);
+  } else {
+    const item = cart.find(item => item.id === id);
+    if (item) item.qty = qty;
+  }
+  saveCart(cart);
+  renderCartPanel();
+}
+
+function renderCartPanel() {
+  const cartPanel = document.getElementById('cart-panel');
+  if (!cartPanel) return;
+  const body = cartPanel.querySelector('.collapsible-body');
+  if (!body) return;
+
+  const cart = getCart();
+
+  if (cart.length === 0) {
+    body.innerHTML = '<p class="cart-empty-msg">Your cart is empty.</p>';
+    return;
+  }
+
+  body.innerHTML = cart.map(item => `
+    <div class="cart-item-row" data-id="${item.id}">
+      <span class="cart-item-name">${item.name}</span>
+      <div class="cart-item-qty">
+        <button class="cart-qty-btn" data-action="minus" data-id="${item.id}" aria-label="Decrease quantity">−</button>
+        <span class="cart-qty-val">${item.qty}</span>
+        <button class="cart-qty-btn" data-action="plus" data-id="${item.id}" aria-label="Increase quantity">+</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Event delegation — cart item rows are re-rendered often, so bind once on document
+document.addEventListener('click', function (e) {
+  const btn = e.target.closest('.cart-qty-btn');
+  if (!btn) return;
+  const id     = btn.dataset.id;
+  const cart   = getCart();
+  const item   = cart.find(i => i.id === id);
+  if (!item) return;
+  const delta  = btn.dataset.action === 'plus' ? 1 : -1;
+  setCartItemQty(id, item.qty + delta);
+});
+
+renderCartPanel();
+
+
 // ===== COLLAPSIBLE LOG =====
 function toggleLog(header) {
+  const cartPanel = header.closest('#cart-panel');
+  if (cartPanel && cartPanel.classList.contains('cart-panel--static')) return; // non-collapsible while shown as a main panel
+
   const body   = header.nextElementSibling;
   const isOpen = body.classList.contains('open');
   body.classList.toggle('open');
   header.classList.toggle('open');
   header.setAttribute('aria-expanded', !isOpen);
+
+  // Persist the cart panel's open/closed state across page loads
+  if (cartPanel) {
+    try { localStorage.setItem('cartPanelOpen', String(!isOpen)); } catch (e) {}
+  }
 }
 
 document.querySelectorAll('.collapsible-header').forEach(h => {
@@ -84,6 +186,20 @@ document.querySelectorAll('.collapsible-header').forEach(h => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleLog(h); }
   });
 });
+
+// Restore cart panel open/closed state on load
+(function () {
+  const cartPanel = document.getElementById('cart-panel');
+  if (!cartPanel) return;
+  let wasOpen = false;
+  try { wasOpen = localStorage.getItem('cartPanelOpen') === 'true'; } catch (e) {}
+  if (!wasOpen) return;
+  const header = cartPanel.querySelector('.collapsible-header');
+  const body   = cartPanel.querySelector('.collapsible-body');
+  header.classList.add('open');
+  body.classList.add('open');
+  header.setAttribute('aria-expanded', 'true');
+})();
 
 
 // ===== EMAIL SUBMIT =====
