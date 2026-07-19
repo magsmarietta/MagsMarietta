@@ -330,13 +330,11 @@
         clientSecret: data.clientSecret,
         fonts: [
           {
-            family: '04b03',
-            // Elements renders in its own iframe, so it can't see your page's
-            // @font-face — it needs the actual file URL. Built relative to the
-            // current page (not just the domain) so it still works if your
-            // site is served from a subfolder, e.g. yoursite.github.io/repo/.
-            src: "url(" + new URL('fonts/04b03.TTF', window.location.href).href + ")",
-            weight: '400'
+            // VT323 is your site's Google-hosted pixel font (used for the logo/
+            // panel titles). Google-hosted fonts load into Stripe's iframe far
+            // more reliably than a self-hosted TTF like 04b03, which Stripe's
+            // sandboxed renderer was silently rejecting.
+            cssSrc: 'https://fonts.googleapis.com/css2?family=VT323&display=swap'
           }
         ],
         appearance: {
@@ -346,11 +344,8 @@
             colorBackground:  '#fffffe',   // your --panel-main
             colorText:        '#2c2129',   // your --black
             colorDanger:      '#cc0000',
-            fontFamily:       "'04b03', monospace",
-            fontWeightNormal: '400',
-            fontWeightMedium: '400',
-            fontWeightBold:   '400',
-            fontSizeBase:     '16px',
+            fontFamily:       "'VT323', monospace",
+            fontSizeBase:     '18px',      // VT323 reads small at normal sizes — bump it up
             borderRadius:     '4px',       // matches your cart buttons/inputs
             spacingUnit:      '4px'
           },
@@ -358,7 +353,7 @@
             '.Tab': {
               border: '2px solid #75707c',       // your --border-tl
               boxShadow: 'none',
-              fontFamily: "'04b03', monospace"
+              fontFamily: "'VT323', monospace"
             },
             '.Tab:hover': {
               color: '#d365e4'
@@ -368,12 +363,12 @@
               backgroundColor: '#fffffe'
             },
             '.TabLabel': {
-              fontFamily: "'04b03', monospace"
+              fontFamily: "'VT323', monospace"
             },
             '.Input': {
               border: '2px solid #75707c',
               boxShadow: 'none',
-              fontFamily: "'04b03', monospace"
+              fontFamily: "'VT323', monospace"
             },
             '.Input:focus': {
               border: '2px solid #d365e4',
@@ -381,7 +376,7 @@
             },
             '.Label': {
               color: '#2c2129',
-              fontFamily: "'04b03', monospace"
+              fontFamily: "'VT323', monospace"
             }
           }
         }
