@@ -139,3 +139,27 @@
   white-space: nowrap;
   margin-left: auto;
 }
+
+/* ===== CHECKOUT PAGE MOBILE ===== */
+
+.checkout-page #page-wrap {
+  grid-template-columns: 1fr;
+}
+
+.checkout-page #sidebar {
+  width: 100%;
+}
+
+.checkout-page .nav-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.checkout-page .nav-links a {
+  width: 100%;
+}
+
+.checkout-page #main-content {
+  width: 100%;
+}

@@ -48,10 +48,11 @@
   function placeCartPanel() {
     const isMobile = mq.matches;
     const isAboutPage        = document.body.classList.contains('about-page');
+    const isCheckoutPage     = document.body.classList.contains('checkout-page');
     const isShopOrProductPage = document.body.classList.contains('shop-page') ||
                                  document.body.classList.contains('product-page');
 
-    if (isMobile && isAboutPage) {
+    if (isCheckoutPage || (isMobile && isAboutPage)) {
       cartPanel.style.display = 'none';
       cartPanel.classList.remove('cart-panel--static');
       return;
@@ -187,8 +188,7 @@ document.addEventListener('click', function (e) {
   }
 
   if (e.target.closest('#cart-checkout-btn')) {
-    // TODO: wire to real checkout / Payhip
-    console.log('Checkout clicked. Cart:', getCart());
+    window.location.href = 'checkout.html';
   }
 });
 
