@@ -135,6 +135,12 @@
   const app = document.getElementById('checkout-app');
   if (!app) return;
 
+  // Pricing constants — tune these as your real costs firm up.
+  // TAX_RATE: combined CA/Walnut Creek sales tax on the item subtotal (confirm current rate at cdtfa.ca.gov)
+  // SHIPPING_FLAT_FEE: flat estimated cost to ship a finished order to the customer (e.g. via UPS)
+  const TAX_RATE          = 0.0925;
+  const SHIPPING_FLAT_FEE = 9.00;
+
   function render() {
     const cart = getCart();
 
@@ -152,12 +158,20 @@
 
     const rows = cart.map(item => {
       const metaParts = [item.size ? `Size ${item.size}` : null].filter(Boolean);
+      const imgHTML = item.thumbnail
+        ? `<img src="${item.thumbnail}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);">`
+        : `<div class="pixel-art-slot"><span>pixel art</span></div>`;
       return `
       <div class="cart-item-row" data-id="${item.id}">
+        <div class="cart-item-thumb">
+          <div class="product-card">
+            <div class="product-price">$${item.price.toFixed(2)}</div>
+            ${imgHTML}
+          </div>
+        </div>
         <div class="cart-item-info">
           <span class="cart-item-name">${item.name}</span>
           ${metaParts.length ? `<span class="cart-item-meta">${metaParts.join(' · ')}</span>` : ''}
-          <span class="cart-item-price">$${item.price.toFixed(2)} each</span>
         </div>
         <div class="cart-item-qty">
           <button class="cart-qty-btn" data-action="minus" data-id="${item.id}" aria-label="Decrease quantity">−</button>
@@ -167,13 +181,28 @@
       </div>`;
     }).join('');
 
-    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const shipping = SHIPPING_FLAT_FEE;
+    const tax      = subtotal * TAX_RATE;
+    const total    = subtotal + shipping + tax;
 
     app.innerHTML = `
       <div class="panel">
         <div class="panel-title"><img src="images/icon-cart.webp" alt="" class="panel-icon"> Order Summary</div>
         <div class="panel-body">
           <div class="cart-items-list">${rows}</div>
+          <div class="cart-summary-row">
+            <span>SUBTOTAL</span>
+            <span>$${subtotal.toFixed(2)}</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>SHIPPING</span>
+            <span>$${shipping.toFixed(2)}</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>TAX</span>
+            <span>$${tax.toFixed(2)}</span>
+          </div>
           <div class="cart-total-row">
             <span>TOTAL</span>
             <span>$${total.toFixed(2)}</span>

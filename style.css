@@ -443,11 +443,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 8px 0;
+  gap: 14px;
+  padding: 10px 0;
   border-bottom: 1px dashed var(--gray-mid);
 }
 .cart-item-row:last-child { border-bottom: none; }
+
+.cart-item-thumb {
+  width: 60px;
+  flex-shrink: 0;
+  margin: 10px 4px 0 4px;
+}
+
+.cart-item-thumb .product-price {
+  font-size: 9px;
+  padding: 3px 6px;
+  top: -8px;
+  left: -8px;
+}
+
+.cart-item-thumb .pixel-art-slot span {
+  font-size: 9px;
+  padding: 1px 4px;
+}
 
 .cart-item-info {
   display: flex;
@@ -480,6 +498,17 @@ body {
   font-size: 11px;
   color: var(--gray-dark);
   letter-spacing: 0.5px;
+}
+
+.cart-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--gray-dark);
+  letter-spacing: 1px;
+  padding: 4px 0;
 }
 
 .cart-total-row {
@@ -568,6 +597,14 @@ body {
   gap: 10px;
   min-width: 0;
   overflow: visible;
+}
+
+/* Checkout page: panels sit inside #checkout-app, one level deeper than
+   #main-content's own flex children, so it needs the same gap treatment. */
+#checkout-app {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* WELCOME */

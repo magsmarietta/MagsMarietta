@@ -99,7 +99,7 @@ function saveCart(cart) {
 }
 
 // Adds an item to the cart (stacks qty onto an existing entry with the same id)
-// item: { id, name, price, category, size, qty }
+// item: { id, name, price, category, size, thumbnail, qty }
 function addToCart(item) {
   const cart = getCart();
   const existing = cart.find(i => i.id === item.id);
@@ -107,12 +107,13 @@ function addToCart(item) {
     existing.qty += item.qty || 1;
   } else {
     cart.push({
-      id:       item.id,
-      name:     item.name,
-      price:    item.price,
-      category: item.category || null,
-      size:     item.size || null,
-      qty:      item.qty || 1
+      id:        item.id,
+      name:      item.name,
+      price:     item.price,
+      category:  item.category || null,
+      size:      item.size || null,
+      thumbnail: item.thumbnail || null,
+      qty:       item.qty || 1
     });
   }
   saveCart(cart);
