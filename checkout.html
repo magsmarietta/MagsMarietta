@@ -118,6 +118,16 @@
     <!-- MAIN CONTENT: populated by JS from the stored cart -->
     <main id="main-content">
       <div id="checkout-app"></div>
+
+      <!-- GREAT DEALS -->
+      <div class="panel">
+        <div class="panel-title"><img src="images/icon-deals.webp" alt="" class="panel-icon"> Great Deals</div>
+        <div class="panel-body appraisal-text">
+          <div class="product-grid" id="deals-grid">
+            <!-- Populated by products.js -->
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 
@@ -128,7 +138,35 @@
 
 </div>
 
+<script src="products.js"></script>
 <script src="main.js"></script>
+<script>
+// ── Populate the Great Deals grid ──────────
+(function () {
+  if (typeof PRODUCTS === 'undefined') return;
+
+  function makeCard(p) {
+    const card = document.createElement('a');
+    card.className  = 'product-card';
+    card.href       = `product.html?id=${p.id}`;
+    card.title      = p.name;
+    card.style.cssText = 'display:block;text-decoration:none;color:inherit;overflow:visible;position:relative;';
+
+    const imgHTML = p.thumbnail
+      ? `<img src="${p.thumbnail}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);">`
+      : `<div class="pixel-art-slot"><span>pixel art</span></div>`;
+
+    card.innerHTML = `
+      <div class="product-price">$${p.price.toFixed(2)}</div>
+      ${imgHTML}
+      <div class="product-label">${p.name}</div>`;
+    return card;
+  }
+
+  const dealsGrid = document.getElementById('deals-grid');
+  if (dealsGrid) PRODUCTS.filter(p => p.deal).forEach(p => dealsGrid.appendChild(makeCard(p)));
+})();
+</script>
 <script>
 // ── Render the checkout page from the stored cart ──────────
 (function () {
@@ -150,7 +188,7 @@
           <div class="panel-title"><img src="images/icon-cart.webp" alt="" class="panel-icon"> Checkout</div>
           <div class="panel-body appraisal-text">
             <p style="text-align:center;">Your cart is empty.</p>
-            <p style="text-align:center;"><a href="shop.html">Browse the shop &rarr;</a></p>
+            <p style="text-align:center;"><a href="shop.html" class="show-more-btn">Browse the Shop</a></p>
           </div>
         </div>`;
       return;

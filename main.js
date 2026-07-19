@@ -154,7 +154,7 @@ function renderCartPanel() {
       <div class="cart-item-info">
         <span class="cart-item-name">${item.name}</span>
         ${metaParts.length ? `<span class="cart-item-meta">${metaParts.join(' · ')}</span>` : ''}
-        <span class="cart-item-price">$${item.price.toFixed(2)} each</span>
+        <span class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</span>
       </div>
       <div class="cart-item-qty">
         <button class="cart-qty-btn" data-action="minus" data-id="${item.id}" aria-label="Decrease quantity">−</button>
