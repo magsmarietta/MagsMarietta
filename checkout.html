@@ -328,14 +328,59 @@
       // Re-create Elements with the fresh clientSecret (amount may have changed)
       elements = stripe.elements({
         clientSecret: data.clientSecret,
+        fonts: [
+          {
+            family: '04b03',
+            // Elements renders in its own iframe, so it can't see your page's
+            // @font-face — it needs the actual file URL, same as style.css uses.
+            src: "url(" + window.location.origin + "/fonts/04b03.TTF)",
+            weight: '400'
+          }
+        ],
         appearance: {
           theme: 'stripe',
           variables: {
-            colorPrimary:    '#d365e4',
-            colorBackground: '#fffffe',
-            colorText:       '#2c2129',
-            fontFamily:      "'04b03', monospace",
-            borderRadius:    '4px'
+            colorPrimary:     '#d365e4',   // your --pink
+            colorBackground:  '#fffffe',   // your --panel-main
+            colorText:        '#2c2129',   // your --black
+            colorDanger:      '#cc0000',
+            fontFamily:       "'04b03', monospace",
+            fontWeightNormal: '400',
+            fontWeightMedium: '400',
+            fontWeightBold:   '400',
+            fontSizeBase:     '16px',
+            borderRadius:     '4px',       // matches your cart buttons/inputs
+            spacingUnit:      '4px'
+          },
+          rules: {
+            '.Tab': {
+              border: '2px solid #75707c',       // your --border-tl
+              boxShadow: 'none',
+              fontFamily: "'04b03', monospace"
+            },
+            '.Tab:hover': {
+              color: '#d365e4'
+            },
+            '.Tab--selected': {
+              border: '2px solid #d365e4',
+              backgroundColor: '#fffffe'
+            },
+            '.TabLabel': {
+              fontFamily: "'04b03', monospace"
+            },
+            '.Input': {
+              border: '2px solid #75707c',
+              boxShadow: 'none',
+              fontFamily: "'04b03', monospace"
+            },
+            '.Input:focus': {
+              border: '2px solid #d365e4',
+              boxShadow: '0 0 0 1px #d365e4'
+            },
+            '.Label': {
+              color: '#2c2129',
+              fontFamily: "'04b03', monospace"
+            }
           }
         }
       });
