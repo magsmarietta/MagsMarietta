@@ -681,7 +681,7 @@
             ${p.category === 'Ring' ? `
             <div class="size-label" id="size-label">SIZE</div>
             <div class="size-row" id="size-row">
-              ${Array.from({length: 13}, (_, i) => i + 1).map(s =>
+              ${Array.from({length: 13}, (_, i) => i + 3).map(s =>
                 `<button class="size-btn" data-size="${s}">${s}</button>`
               ).join('')}
             </div>
