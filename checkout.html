@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="mobile.css" media="(max-width: 700px) and (orientation: portrait)">
+<script src="https://js.stripe.com/v3/"></script>
 </head>
 <body class="checkout-page">
 
@@ -119,6 +120,20 @@
     <main id="main-content">
       <div id="checkout-app"></div>
 
+      <!-- COMPLETE ORDER — static panel (not re-rendered on qty changes) -->
+      <div class="panel" id="complete-order-panel" style="display:none;">
+        <div class="panel-title"><img src="images/icon-notice.gif" alt="" class="panel-icon"> Complete Order</div>
+        <div class="panel-body appraisal-text">
+          <form id="payment-form">
+            <div id="payment-element"><!-- Stripe mounts the card fields here --></div>
+            <button type="submit" class="cart-checkout-btn" id="submit-payment-btn" style="margin-top:16px;">
+              <span id="submit-btn-text">PLACE ORDER</span>
+            </button>
+            <p id="payment-message" style="text-align:center;margin-top:10px;color:#cc0000;"></p>
+          </form>
+        </div>
+      </div>
+
       <!-- GREAT DEALS -->
       <div class="panel">
         <div class="panel-title"><img src="images/icon-deals.webp" alt="" class="panel-icon"> Great Deals</div>
@@ -226,7 +241,7 @@
     const total    = subtotal + shipping + tax;
 
     app.innerHTML = `
-      <div class="panel">
+      <div class="panel" id="order-summary-panel">
         <div class="panel-title"><img src="images/icon-cart.webp" alt="" class="panel-icon"> Order Summary</div>
         <div class="panel-body">
           <div class="cart-items-list">${rows}</div>
@@ -247,14 +262,6 @@
             <span>$${total.toFixed(2)}</span>
           </div>
         </div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-title"><img src="images/icon-notice.gif" alt="" class="panel-icon"> Complete Order</div>
-        <div class="panel-body appraisal-text">
-          <p style="text-align:center;">Payment isn't connected yet — this button is a placeholder.</p>
-          <button class="cart-checkout-btn" id="place-order-btn">PLACE ORDER</button>
-        </div>
       </div>`;
   }
 
@@ -264,14 +271,115 @@
   document.addEventListener('click', function (e) {
     if (e.target.closest('.cart-qty-btn')) {
       render();
-    }
-    if (e.target.closest('#place-order-btn')) {
-      // TODO: wire to real payment / order placement
-      console.log('Place order clicked. Cart:', getCart());
+      scheduleRefreshPaymentIntent();
     }
   });
 
   render();
+
+  // ── Stripe Elements wiring ──────────────────────────────
+  // CHANGE THESE TWO VALUES:
+  const STRIPE_PUBLISHABLE_KEY = 'pk_test_51TulgoGwi2Y6ihLxPs2vSSMm4Pt6zhBNsUYEVDNKR0qW9SBlVoRcZhnYGxWT8mrkr84EgWVaFqTG4hk4Vyp83jdb00uRJUN1rQ';
+  const CREATE_INTENT_URL      = 'https://mags-marietta.vercel.app/api/create-payment-intent';
+
+  const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+  let elements     = null;
+  let refreshTimer = null;
+
+  const orderPanel   = document.getElementById('complete-order-panel');
+  const paymentForm  = document.getElementById('payment-form');
+  const paymentMsg   = document.getElementById('payment-message');
+  const submitBtn    = document.getElementById('submit-payment-btn');
+  const submitBtnTxt = document.getElementById('submit-btn-text');
+
+  function setSubmitting(isSubmitting) {
+    submitBtn.disabled = isSubmitting;
+    submitBtnTxt.textContent = isSubmitting ? 'PROCESSING...' : 'PLACE ORDER';
+  }
+
+  // Debounced so rapid +/- clicks don't spam the API — waits for clicks to settle.
+  function scheduleRefreshPaymentIntent() {
+    clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(refreshPaymentIntent, 500);
+  }
+
+  async function refreshPaymentIntent() {
+    const cart = getCart();
+
+    if (cart.length === 0) {
+      orderPanel.style.display = 'none';
+      return;
+    }
+
+    try {
+      const res = await fetch(CREATE_INTENT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cart })
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        paymentMsg.textContent = data.error || 'Could not load payment form.';
+        orderPanel.style.display = '';
+        return;
+      }
+
+      // Re-create Elements with the fresh clientSecret (amount may have changed)
+      elements = stripe.elements({
+        clientSecret: data.clientSecret,
+        appearance: {
+          theme: 'stripe',
+          variables: {
+            colorPrimary:    '#d365e4',
+            colorBackground: '#fffffe',
+            colorText:       '#2c2129',
+            fontFamily:      "'04b03', monospace",
+            borderRadius:    '4px'
+          }
+        }
+      });
+
+      const paymentElement = elements.create('payment');
+      document.getElementById('payment-element').innerHTML = '';
+      paymentElement.mount('#payment-element');
+
+      paymentMsg.textContent = '';
+      orderPanel.style.display = '';
+    } catch (err) {
+      console.error(err);
+      paymentMsg.textContent = 'Could not load payment form. Please refresh and try again.';
+      orderPanel.style.display = '';
+    }
+  }
+
+  paymentForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (!elements) return;
+
+    setSubmitting(true);
+    paymentMsg.textContent = '';
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: window.location.origin + '/order-submitted.html'
+      },
+      redirect: 'if_required' // stay on this page unless the bank requires extra verification
+    });
+
+    if (error) {
+      paymentMsg.textContent = error.message || 'Payment failed. Please check your card details.';
+      setSubmitting(false);
+      return;
+    }
+
+    // Success and no redirect was needed — clear the cart and move on ourselves.
+    saveCart([]);
+    window.location.href = 'order-submitted.html';
+  });
+
+  refreshPaymentIntent();
 })();
 </script>
 </body>
