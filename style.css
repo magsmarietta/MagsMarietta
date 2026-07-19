@@ -450,7 +450,7 @@ body {
 .cart-item-row:last-child { border-bottom: none; }
 
 .cart-items-list {
-  border-bottom: 2px solid var(--black);
+  border-bottom: 2px solid var(--gray-mid);
   padding-bottom: 8px;
   margin-bottom: 6px;
 }
