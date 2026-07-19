@@ -332,8 +332,10 @@
           {
             family: '04b03',
             // Elements renders in its own iframe, so it can't see your page's
-            // @font-face — it needs the actual file URL, same as style.css uses.
-            src: "url(" + window.location.origin + "/fonts/04b03.TTF)",
+            // @font-face — it needs the actual file URL. Built relative to the
+            // current page (not just the domain) so it still works if your
+            // site is served from a subfolder, e.g. yoursite.github.io/repo/.
+            src: "url(" + new URL('fonts/04b03.TTF', window.location.href).href + ")",
             weight: '400'
           }
         ],
