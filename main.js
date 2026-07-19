@@ -99,7 +99,7 @@ function saveCart(cart) {
 }
 
 // Adds an item to the cart (stacks qty onto an existing entry with the same id)
-// item: { id, name, price, category, size, thumbnail, qty }
+// item: { id, productId, name, price, category, size, thumbnail, qty }
 function addToCart(item) {
   const cart = getCart();
   const existing = cart.find(i => i.id === item.id);
@@ -108,6 +108,7 @@ function addToCart(item) {
   } else {
     cart.push({
       id:        item.id,
+      productId: item.productId || item.id,
       name:      item.name,
       price:     item.price,
       category:  item.category || null,

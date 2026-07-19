@@ -161,16 +161,17 @@
       const imgHTML = item.thumbnail
         ? `<img src="${item.thumbnail}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);">`
         : `<div class="pixel-art-slot"><span>pixel art</span></div>`;
+      const productHref = `product.html?id=${encodeURIComponent(item.productId || item.id)}`;
       return `
       <div class="cart-item-row" data-id="${item.id}">
-        <div class="cart-item-thumb">
+        <a href="${productHref}" class="cart-item-thumb">
           <div class="product-card">
             <div class="product-price">$${item.price.toFixed(2)}</div>
             ${imgHTML}
           </div>
-        </div>
+        </a>
         <div class="cart-item-info">
-          <span class="cart-item-name">${item.name}</span>
+          <a href="${productHref}" class="cart-item-name">${item.name}</a>
           ${metaParts.length ? `<span class="cart-item-meta">${metaParts.join(' · ')}</span>` : ''}
         </div>
         <div class="cart-item-qty">
