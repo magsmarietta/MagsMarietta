@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="mobile.css" media="(max-width: 700px) and (orientation: portrait)">
 <script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init({ publicKey: "kEJGe22_KFKE50HkP" });</script>
 </head>
 <body class="checkout-page">
 
@@ -402,7 +404,7 @@
     setSubmitting(true);
     paymentMsg.textContent = '';
 
-    const { error } = await stripe.confirmPayment({
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         return_url: window.location.origin + '/order-submitted.html'
@@ -416,7 +418,26 @@
       return;
     }
 
-    // Success and no redirect was needed — clear the cart and move on ourselves.
+    // Success and no redirect was needed — notify the shop, clear the cart, move on.
+    const cart  = getCart();
+    const items = cart
+      .map(i => `${i.qty}x ${i.name}${i.size ? ' (Size ' + i.size + ')' : ''} - $${(i.price * i.qty).toFixed(2)}`)
+      .join('\n');
+    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0).toFixed(2);
+
+    try {
+      await emailjs.send('service_ipkuns5', 'template_8p9hubu', {
+        order_number: paymentIntent ? paymentIntent.id : ('MM-' + Date.now()),
+        order_date:   new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }),
+        order_items:  items,
+        order_total:  '$' + total
+      });
+    } catch (err) {
+      // Don't block the customer's checkout if the notification email fails —
+      // the order itself already succeeded with Stripe.
+      console.error('EmailJS order notification failed:', err);
+    }
+
     saveCart([]);
     window.location.href = 'order-submitted.html';
   });

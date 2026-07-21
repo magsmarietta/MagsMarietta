@@ -246,12 +246,27 @@ function handleEmailSubmit(btn) {
     note.style.color = '#cc0000';
     return;
   }
-  btn.textContent       = 'SENT';
-  btn.style.background  = '#222';
-  input.value           = '';
-  input.placeholder     = "YOU'RE ON THE LIST.";
-  note.textContent      = 'Thank you for joining!';
-  note.style.color      = '#2c2129';
+
+  const originalLabel = btn.textContent;
+  btn.disabled     = true;
+  btn.textContent  = 'SENDING...';
+
+  emailjs.send('service_ipkuns5', 'template_9lv13af', { email: val })
+    .then(() => {
+      btn.textContent       = 'SENT';
+      btn.style.background  = '#222';
+      input.value            = '';
+      input.placeholder      = "YOU'RE ON THE LIST.";
+      note.textContent       = 'Thank you for joining!';
+      note.style.color       = '#2c2129';
+    })
+    .catch((err) => {
+      console.error('EmailJS contact send failed:', err);
+      btn.disabled    = false;
+      btn.textContent = originalLabel;
+      note.textContent = 'Something went wrong — please try again.';
+      note.style.color = '#cc0000';
+    });
 }
 
 
