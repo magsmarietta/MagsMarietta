@@ -4,6 +4,6 @@
   "private": true,
   "dependencies": {
     "stripe": "^17.0.0",
-    "@vercel/blob": "^1.0.0"
+    "@vercel/blob": "^2.6.1"
   }
 }
