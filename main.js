@@ -236,7 +236,7 @@ document.querySelectorAll('.collapsible-header').forEach(h => {
 
 
 // ===== EMAIL SUBMIT =====
-function handleEmailSubmit(btn) {
+async function handleEmailSubmit(btn) {
   const input = btn.previousElementSibling;
   const note  = document.getElementById('contact-note');
   const val   = input.value.trim();
@@ -248,25 +248,41 @@ function handleEmailSubmit(btn) {
   }
 
   const originalLabel = btn.textContent;
-  btn.disabled     = true;
-  btn.textContent  = 'SENDING...';
+  btn.disabled    = true;
+  btn.textContent = 'SENDING...';
 
-  emailjs.send('service_ipkuns5', 'template_9lv13af', { email: val })
-    .then(() => {
-      btn.textContent       = 'SENT';
-      btn.style.background  = '#222';
-      input.value            = '';
-      input.placeholder      = "YOU'RE ON THE LIST.";
-      note.textContent       = 'Thank you for joining!';
-      note.style.color       = '#2c2129';
-    })
-    .catch((err) => {
-      console.error('EmailJS contact send failed:', err);
+  try {
+    const checkRes = await fetch('https://mags-marietta.vercel.app/api/check-subscriber', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: val })
+    });
+    const checkData = await checkRes.json();
+    if (!checkRes.ok) throw new Error(checkData.error || 'Server error');
+
+    if (checkData.alreadySubscribed) {
       btn.disabled    = false;
       btn.textContent = originalLabel;
-      note.textContent = 'Something went wrong — please try again.';
+      note.textContent = "YOU'RE ALREADY SIGNED UP!";
       note.style.color = '#cc0000';
-    });
+      return;
+    }
+
+    await emailjs.send('service_ipkuns5', 'template_9lv13af', { email: val });
+
+    btn.textContent       = 'SENT';
+    btn.style.background  = '#222';
+    input.value            = '';
+    input.placeholder      = "YOU'RE ON THE LIST.";
+    note.textContent       = 'Thank you for joining!';
+    note.style.color       = '#2c2129';
+  } catch (err) {
+    console.error('Signup failed:', err);
+    btn.disabled    = false;
+    btn.textContent = originalLabel;
+    note.textContent = 'Something went wrong — please try again.';
+    note.style.color = '#cc0000';
+  }
 }
 
 
