@@ -127,6 +127,17 @@
         <div class="panel-title"><img src="images/icon-notice.gif" alt="" class="panel-icon"> Complete Order</div>
         <div class="panel-body appraisal-text">
           <form id="payment-form">
+            <label for="checkout-email" style="display:block;margin-bottom:6px;font-weight:bold;">
+              Email <span style="color:#cc0000;">*</span>
+            </label>
+            <input
+              type="email"
+              id="checkout-email"
+              class="contact-input"
+              placeholder="YOUR_EMAIL@MAGSMARIETTA.COM"
+              required
+              style="width:100%;box-sizing:border-box;margin-bottom:16px;"
+            />
             <div id="payment-element"><!-- Stripe mounts the card fields here --></div>
             <button type="submit" class="cart-checkout-btn" id="submit-payment-btn" style="margin-top:16px;">
               <span id="submit-btn-text">PLACE ORDER</span>
@@ -384,7 +395,9 @@
         }
       });
 
-      const paymentElement = elements.create('payment');
+      const paymentElement = elements.create('payment', {
+        fields: { billingDetails: { email: 'never' } }
+      });
       document.getElementById('payment-element').innerHTML = '';
       paymentElement.mount('#payment-element');
 
@@ -401,13 +414,25 @@
     e.preventDefault();
     if (!elements) return;
 
+    const emailInput      = document.getElementById('checkout-email');
+    const customerEmail   = emailInput.value.trim();
+
+    if (!customerEmail || !customerEmail.includes('@')) {
+      paymentMsg.textContent = 'Please enter a valid email address.';
+      emailInput.focus();
+      return;
+    }
+
     setSubmitting(true);
     paymentMsg.textContent = '';
 
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: window.location.origin + '/order-submitted.html'
+        return_url: window.location.origin + '/order-submitted.html',
+        payment_method_data: {
+          billing_details: { email: customerEmail }
+        }
       },
       redirect: 'if_required' // stay on this page unless the bank requires extra verification
     });
@@ -426,11 +451,14 @@
     const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0).toFixed(2);
 
     try {
+      // No duplicate check here on purpose — every completed order should
+      // get its own confirmation email, even repeat orders from the same address.
       await emailjs.send('service_ipkuns5', 'template_8p9hubu', {
         order_number: paymentIntent ? paymentIntent.id : ('MM-' + Date.now()),
         order_date:   new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }),
         order_items:  items,
-        order_total:  '$' + total
+        order_total:  '$' + total,
+        email:        customerEmail
       });
     } catch (err) {
       // Don't block the customer's checkout if the notification email fails —
