@@ -30,6 +30,16 @@ async function saveSubscribers(list) {
 }
 
 module.exports = async (req, res) => {
+  // Your site is hosted on GitHub Pages, this function on Vercel — different
+  // origins, so the browser needs explicit permission (CORS) to call it.
+  res.setHeader('Access-Control-Allow-Origin', 'https://magsmarietta.github.io');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Browsers send an OPTIONS request first to check permission before the
+  // real POST — just approve it and stop, no work to do here.
+  if (req.method === 'OPTIONS') return res.status(204).end();
+
   if (req.method !== 'POST') return res.status(405).end();
 
   const { email } = req.body || {};
