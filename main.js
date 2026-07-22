@@ -274,7 +274,7 @@ async function handleEmailSubmit(btn) {
     btn.style.background  = '#222';
     input.value            = '';
     input.placeholder      = "YOU'RE ON THE LIST.";
-    note.textContent       = 'Thank you for joining!';
+    note.textContent       = 'THANK YOU FOR JOINING!';
     note.style.color       = '#2c2129';
   } catch (err) {
     console.error('Signup failed:', err);
