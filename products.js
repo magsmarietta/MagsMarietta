@@ -6,24 +6,6 @@
 
 const PRODUCTS = [
   {
-    id:          "skull-tag",
-    name:        "Skull Tag",
-    price:       30.00,
-    category:    "Zipper Pull",
-    description: "Stacked skulls zipper pull.",
-    details:     ["316L Stainless Steel", "Polished finish", "Fits all zippers", "Approx. 7.4cm × 32.2cm"],
-    model:       "models/skull-tag.glb",
-    thumbnail:   "images/products/skull-tag/thumbnail.jpg",
-    photos:      [
-      "images/products/skull-tag/1.jpg",
-      "images/products/skull-tag/2.jpg",
-      "images/products/skull-tag/3.jpg"
-    ],
-    inventory:   true,  // ← shows in Inventory
-    deal:        false,  // ← shows in Great Deals
-    featured:    true    // ← shows in Featured Items on index
-  },
-  {
     id:          "mace-tag",
     name:        "Mace Tag",
     price:       30.00,
@@ -40,6 +22,24 @@ const PRODUCTS = [
     inventory:   true,
     deal:        false,
     featured:    true
+  },
+  {
+    id:          "skull-tag",
+    name:        "Skull Tag",
+    price:       30.00,
+    category:    "Zipper Pull",
+    description: "Stacked skulls zipper pull.",
+    details:     ["316L Stainless Steel", "Polished finish", "Fits all zippers", "Approx. 7.4cm × 32.2cm"],
+    model:       "models/skull-tag.glb",
+    thumbnail:   "images/products/skull-tag/thumbnail.jpg",
+    photos:      [
+      "images/products/skull-tag/1.jpg",
+      "images/products/skull-tag/2.jpg",
+      "images/products/skull-tag/3.jpg"
+    ],
+    inventory:   true,  // ← shows in Inventory
+    deal:        false,  // ← shows in Great Deals
+    featured:    true    // ← shows in Featured Items on index
   },
   {
     id:          "spirit-tag",
