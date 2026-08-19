@@ -725,7 +725,7 @@ body {
   width: 100%;
   aspect-ratio: 1;
   overflow: hidden;
-  border-radius: var(--radius);
+  border-radius: calc(var(--radius) - 5px);
   background: var(--gray-light);
 }
 
