@@ -203,7 +203,7 @@
     card.style.cssText = 'display:block;text-decoration:none;color:inherit;overflow:visible;position:relative;';
 
     const imgHTML = p.thumbnail
-      ? `<img src="${p.thumbnail}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);">`
+      ? `<img src="${p.thumbnail}" alt="${p.name}" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;border-radius:var(--radius);">`
       : `<div class="pixel-art-slot"><span>pixel art</span></div>`;
 
     card.innerHTML = `
