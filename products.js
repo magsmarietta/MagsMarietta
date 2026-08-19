@@ -13,7 +13,7 @@ const PRODUCTS = [
     description: "Stacked skulls zipper pull.",
     details:     ["316L Stainless Steel", "Polished finish", "Fits all zippers", "Approx. 7.4cm × 32.2cm"],
     model:       "models/skull-tag.glb",
-    thumbnail:   null,
+    thumbnail:   "images/products/skull-tag/thumbnail.jpg",
     photos:      [
       "images/products/skull-tag/1.jpg",
       "images/products/skull-tag/2.jpg",
@@ -31,7 +31,7 @@ const PRODUCTS = [
     description: "Mace-head zipper pull.",
     details:     ["316L Stainless Steel", "Polished finish", "Fits all zippers", "Approx. 16.6cm × 42.0cm"],
     model:       "models/mace-tag.glb",
-    thumbnail:   null,
+    thumbnail:   "images/products/mace-tag/thumbnail.jpg",
     photos:      [
       "images/products/mace-tag/1.jpg",
       "images/products/mace-tag/2.jpg",
