@@ -49,7 +49,7 @@ const PRODUCTS = [
     description: "Spirit eye zipper pull",
     details:     ["316L Stainless Steel", "Polished finish", "Fits all zippers", "Approx. 25.2cm × 29.8cm"],
     model:       "models/spirit-tag.glb",
-    thumbnail:   null,
+    thumbnail:   "images/products/spirit-tag/thumbnail.jpg",
     photos:      [
       "images/products/spirit-tag/1.jpg",
       "images/products/spirit-tag/2.jpg",
