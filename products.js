@@ -6,24 +6,6 @@
 
 const PRODUCTS = [
   {
-    id:          "mace-tag",
-    name:        "Mace Tag",
-    price:       30.00,
-    category:    "Zipper Pull",
-    description: "Mace-head zipper pull.",
-    details:     ["316L Stainless Steel", "Polished finish", "Fits all zippers", "Approx. 16.6cm × 42.0cm"],
-    model:       "models/mace-tag.glb",
-    thumbnail:   "images/products/mace-tag/thumbnail.jpg",
-    photos:      [
-      "images/products/mace-tag/1.jpg",
-      "images/products/mace-tag/2.jpg",
-      "images/products/mace-tag/3.jpg"
-    ],
-    inventory:   true,
-    deal:        false,
-    featured:    true
-  },
-  {
     id:          "skull-tag",
     name:        "Skull Tag",
     price:       30.00,
@@ -40,6 +22,24 @@ const PRODUCTS = [
     inventory:   true,  // ← shows in Inventory
     deal:        false,  // ← shows in Great Deals
     featured:    true    // ← shows in Featured Items on index
+  },
+  {
+    id:          "mace-tag",
+    name:        "Mace Tag",
+    price:       30.00,
+    category:    "Zipper Pull",
+    description: "Mace-head zipper pull.",
+    details:     ["316L Stainless Steel", "Polished finish", "Fits all zippers", "Approx. 16.6cm × 42.0cm"],
+    model:       "models/mace-tag.glb",
+    thumbnail:   "images/products/mace-tag/thumbnail.jpg",
+    photos:      [
+      "images/products/mace-tag/1.jpg",
+      "images/products/mace-tag/2.jpg",
+      "images/products/mace-tag/3.jpg"
+    ],
+    inventory:   true,
+    deal:        false,
+    featured:    true
   },
   {
     id:          "spirit-tag",
