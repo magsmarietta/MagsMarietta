@@ -105,9 +105,7 @@ const PRODUCTS = [
     model:       "models/jump-ring.glb",
     thumbnail:   null,
     photos:      [
-      "images/products/jump-ring/1.jpg",
-      "images/products/jump-ring/2.jpg",
-      "images/products/jump-ring/3.jpg"
+      "images/products/jump-ring/1.jpg"
     ],
     inventory:   true,
     deal:        true,
