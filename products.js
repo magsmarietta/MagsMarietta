@@ -34,8 +34,7 @@ const PRODUCTS = [
     thumbnail:   "images/products/mace-tag/thumbnail.jpg",
     photos:      [
       "images/products/mace-tag/1.jpg",
-      "images/products/mace-tag/2.jpg",
-      "images/products/mace-tag/3.jpg"
+      "images/products/mace-tag/2.jpg"
     ],
     inventory:   true,
     deal:        false,
