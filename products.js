@@ -111,7 +111,7 @@ const PRODUCTS = [
     ],
     inventory:   true,
     deal:        true,
-    featured:    false
+    featured:    true
   },
   {
     id:          "desert-eagle",
@@ -128,8 +128,8 @@ const PRODUCTS = [
       "images/products/desert-eagle/3.jpg"
     ],
     inventory:   false,
-    deal:        true,
-    featured:    true
+    deal:        false,
+    featured:    false
   }
 ];
 
