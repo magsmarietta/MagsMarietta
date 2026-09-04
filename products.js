@@ -106,9 +106,9 @@ const PRODUCTS = [
     photos:      [
       "images/products/jump-ring/1.jpg"
     ],
-    inventory:   true,
-    deal:        true,
-    featured:    true
+    inventory:   false,
+    deal:        false,
+    featured:    false
   },
   {
     id:          "desert-eagle",
