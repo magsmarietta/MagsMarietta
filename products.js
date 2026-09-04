@@ -72,9 +72,9 @@ const PRODUCTS = [
       "images/products/flower-ring/2.jpg",
       "images/products/flower-ring/3.jpg"
     ],
-    inventory:   true,
+    inventory:   false,
     deal:        false,
-    featured:    true
+    featured:    false
   },
   {
     id:          "etched-ring",
@@ -90,9 +90,9 @@ const PRODUCTS = [
       "images/products/etched-ring/2.jpg",
       "images/products/etched-ring/3.jpg"
     ],
-    inventory:   true,
+    inventory:   false,
     deal:        false,
-    featured:    true
+    featured:    false
   },
   {
     id:          "jump-ring",
