@@ -107,7 +107,7 @@ const PRODUCTS = [
       "images/products/jump-ring/1.jpg"
     ],
     inventory:   false,
-    deal:        false,
+    deal:        true,
     featured:    false
   },
   {
