@@ -1,7 +1,7 @@
 /* =====================================================
    MAGS MARIETTA — products.js
    Single source of truth for all products.
-   Edit here — shop.html and product.html both read this.
+   Edit here — /shop and /product both read this.
    ===================================================== */
 
 const PRODUCTS = [

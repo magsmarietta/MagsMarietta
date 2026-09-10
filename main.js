@@ -190,7 +190,7 @@ document.addEventListener('click', function (e) {
   }
 
   if (e.target.closest('#cart-checkout-btn')) {
-    window.location.href = 'checkout.html';
+    window.location.href = '/checkout';
   }
 });
 

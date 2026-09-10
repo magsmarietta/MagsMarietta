@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Mags Marietta</title>
+<link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg">
+<link rel="shortcut icon" href="/images/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Mags Marietta">
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+<meta name="description" content="Complete your Mags Marietta order — secure checkout, free US shipping.">
+<meta name="theme-color" content="#ffffff">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mags Marietta">
+<meta property="og:title" content="Checkout — Mags Marietta">
+<meta property="og:description" content="Complete your Mags Marietta order — secure checkout, free US shipping.">
+<meta property="og:url" content="https://magsmarietta.com/checkout">
+<meta property="og:image" content="https://magsmarietta.com/images/social-preview.jpg">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/mobile.css" media="(max-width: 700px) and (orientation: portrait)">
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init({ publicKey: "kEJGe22_KFKE50HkP" });</script>
+</head>
+<body class="checkout-page">
+
+<!-- ===== LOADING SCREEN ===== -->
+<div id="loader">
+  <img src="/images/loading-eyeball.gif" alt="" style="width:80px; height:80px; image-rendering:pixelated; margin-bottom:16px;">
+  <div class="loader-logo">MAGS MARIETTA</div>
+  <div class="loader-bar-wrap">
+    <div class="loader-bar-inner" id="loader-bar"></div>
+  </div>
+  <div class="loader-status" id="loader-status">LOADING WEBSITE // PLEASE WAIT...</div>
+</div>
+
+<div id="site-outer">
+
+  <!-- HEADER -->
+  <div class="panel panel--header">
+    <div id="site-header">
+      <div id="site-title-block">
+        <h1>Mags Marietta</h1>
+        <p>Jewelry &amp; Hardware</p>
+      </div>
+      <img id="header-heart" src="/images/header-heart.webp" alt="gothic heart gem" />
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="panel" id="marquee-panel" aria-hidden="true">
+    <div class="panel-body">
+      <div class="marquee-track">
+        <div class="marquee-inner" id="marquee-strip-1">
+          <div class="marquee-placeholder"><img src="/images/marquee-1.gif"  alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-2.gif"  alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-3.gif"  alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-4.gif"  alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-5.gif"  alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-6.webp" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-7.gif"  alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-8.gif"  alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-9.gif"  alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-10.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-11.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-12.webp" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-13.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-14.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-15.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-16.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-17.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-18.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-19.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-20.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-21.webp" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-22.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-23.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-24.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-25.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-26.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-27.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-28.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-29.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-30.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-31.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-32.webp" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-33.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-34.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-35.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-36.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+          <div class="marquee-placeholder"><img src="/images/marquee-37.gif" alt="pixel art" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE BODY -->
+  <div id="page-wrap">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+
+      <!-- NAVIGATION -->
+      <div class="panel">
+        <div class="panel-title"><img src="/images/icon-nav.gif" alt="" class="panel-icon"> Navigation</div>
+        <div class="panel-body">
+          <ul class="nav-links">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/shop">Shop</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/home#contact-panel">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CART (collapsible) — stays in the markup for JS consistency, -->
+      <!-- but main.js hides it entirely on the checkout page, since    -->
+      <!-- this whole page already is the cart.                        -->
+      <div class="panel" id="cart-panel">
+        <div class="collapsible-header" onclick="toggleLog(this)" role="button" tabindex="0" aria-expanded="false">
+          <span><img src="/images/icon-cart.webp" alt="" class="panel-icon"> Cart</span>
+          <span class="toggle-arrow">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <p class="cart-empty-msg">Your cart is empty.</p>
+        </div>
+      </div>
+      <div id="cart-anchor-sidebar" style="display:none;"></div>
+
+    </aside>
+
+    <!-- MAIN CONTENT: populated by JS from the stored cart -->
+    <main id="main-content">
+      <div id="checkout-app"></div>
+
+      <!-- COMPLETE ORDER — static panel (not re-rendered on qty changes) -->
+      <div class="panel" id="complete-order-panel" style="display:none;">
+        <div class="panel-title"><img src="/images/icon-notice.gif" alt="" class="panel-icon"> Complete Order</div>
+        <div class="panel-body appraisal-text">
+          <form id="payment-form">
+            <div id="link-authentication-element" style="margin-bottom:16px;"><!-- Stripe mounts the required Email field here --></div>
+            <div id="payment-element"><!-- Stripe mounts the card fields here --></div>
+            <button type="submit" class="cart-checkout-btn" id="submit-payment-btn" style="margin-top:16px;">
+              <span id="submit-btn-text">PLACE ORDER</span>
+            </button>
+            <p id="payment-message" style="text-align:center;margin-top:10px;color:#cc0000;"></p>
+          </form>
+        </div>
+      </div>
+
+      <!-- GREAT DEALS -->
+      <div class="panel">
+        <div class="panel-title"><img src="/images/icon-deals.webp" alt="" class="panel-icon"> Great Deals</div>
+        <div class="panel-body appraisal-text">
+          <div class="product-grid" id="deals-grid">
+            <!-- Populated by products.js -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Mags Marietta</span> &copy; 2025 // Designed to Outlast
+  </footer>
+
+</div>
+
+<script src="/products.js"></script>
+<script src="/main.js"></script>
+<script>
+// ── Populate the Great Deals grid ──────────
+(function () {
+  if (typeof PRODUCTS === 'undefined') return;
+
+  function makeCard(p) {
+    const card = document.createElement('a');
+    card.className  = 'product-card';
+    card.href       = `/product?id=${p.id}`;
+    card.title      = p.name;
+    card.style.cssText = 'display:block;text-decoration:none;color:inherit;overflow:visible;position:relative;';
+
+    const imgHTML = p.thumbnail
+      ? `<img src="${p.thumbnail}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);">`
+      : `<div class="pixel-art-slot"><span>pixel art</span></div>`;
+
+    card.innerHTML = `
+      <div class="product-price">$${p.price.toFixed(2)}</div>
+      ${imgHTML}
+      <div class="product-label">${p.name}</div>`;
+    return card;
+  }
+
+  const dealsGrid = document.getElementById('deals-grid');
+  if (dealsGrid) PRODUCTS.filter(p => p.deal).forEach(p => dealsGrid.appendChild(makeCard(p)));
+})();
+</script>
+<script>
+// ── Render the checkout page from the stored cart ──────────
+(function () {
+  const app = document.getElementById('checkout-app');
+  if (!app) return;
+
+  // Pricing constants — tune these as your real costs firm up.
+  // TAX_RATE: combined CA/Walnut Creek sales tax on the item subtotal (confirm current rate at cdtfa.ca.gov)
+  // SHIPPING_FLAT_FEE: flat estimated cost to ship a finished order to the customer (e.g. via UPS)
+  const TAX_RATE          = 0.0925;
+  const SHIPPING_FLAT_FEE = 9.00;
+
+  function render() {
+    const cart = getCart();
+
+    if (cart.length === 0) {
+      app.innerHTML = `
+        <div class="panel">
+          <div class="panel-title"><img src="/images/icon-cart.webp" alt="" class="panel-icon"> Checkout</div>
+          <div class="panel-body appraisal-text">
+            <p style="text-align:center;">Your cart is empty.</p>
+            <p style="text-align:center;"><a href="/shop" class="show-more-btn">Browse the Shop</a></p>
+          </div>
+        </div>`;
+      return;
+    }
+
+    const rows = cart.map(item => {
+      const metaParts = [item.category, item.size ? `Size ${item.size}` : null].filter(Boolean);
+      const imgHTML = item.thumbnail
+        ? `<img src="${item.thumbnail}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);">`
+        : `<div class="pixel-art-slot"><span>pixel art</span></div>`;
+      const productHref = `/product?id=${encodeURIComponent(item.productId || item.id)}`;
+      return `
+      <div class="cart-item-row" data-id="${item.id}">
+        <a href="${productHref}" class="cart-item-thumb">
+          <div class="product-card">
+            <div class="product-price">$${item.price.toFixed(2)}</div>
+            ${imgHTML}
+          </div>
+        </a>
+        <div class="cart-item-info">
+          <a href="${productHref}" class="cart-item-name">${item.name}</a>
+          ${metaParts.length ? `<span class="cart-item-meta">${metaParts.join(' · ')}</span>` : ''}
+        </div>
+        <div class="cart-item-qty">
+          <button class="cart-qty-btn" data-action="minus" data-id="${item.id}" aria-label="Decrease quantity">−</button>
+          <span class="cart-qty-val">${item.qty}</span>
+          <button class="cart-qty-btn" data-action="plus" data-id="${item.id}" aria-label="Increase quantity">+</button>
+        </div>
+      </div>`;
+    }).join('');
+
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const shipping = SHIPPING_FLAT_FEE;
+    const tax      = subtotal * TAX_RATE;
+    const total    = subtotal + shipping + tax;
+
+    app.innerHTML = `
+      <div class="panel" id="order-summary-panel">
+        <div class="panel-title"><img src="/images/icon-cart.webp" alt="" class="panel-icon"> Order Summary</div>
+        <div class="panel-body">
+          <div class="cart-items-list">${rows}</div>
+          <div class="cart-summary-row">
+            <span>SUBTOTAL</span>
+            <span>$${subtotal.toFixed(2)}</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>SHIPPING</span>
+            <span>$${shipping.toFixed(2)}</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>TAX</span>
+            <span>$${tax.toFixed(2)}</span>
+          </div>
+          <div class="cart-total-row">
+            <span>TOTAL</span>
+            <span>$${total.toFixed(2)}</span>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // main.js's own document-level click listener updates the stored cart
+  // and the sidebar mini-panel first (it's attached earlier in page load),
+  // so by the time this fires, re-rendering here just reflects that change.
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.cart-qty-btn')) {
+      render();
+      scheduleRefreshPaymentIntent();
+    }
+  });
+
+  render();
+
+  // ── Stripe Elements wiring ──────────────────────────────
+  // CHANGE THESE TWO VALUES:
+  const STRIPE_PUBLISHABLE_KEY = 'pk_live_51TulgoGwi2Y6ihLx5Qtrv8yrhcOTFXPooC04ARPogDUzP32bF4qCOCExqjILvnulFbR83EEgKRP4VZwOnQcR4XgQ00TlbFT0dV';
+  const CREATE_INTENT_URL      = 'https://mags-marietta.vercel.app/api/create-payment-intent';
+
+  const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+  let elements     = null;
+  let customerEmail = '';
+  let refreshTimer = null;
+
+  const orderPanel   = document.getElementById('complete-order-panel');
+  const paymentForm  = document.getElementById('payment-form');
+  const paymentMsg   = document.getElementById('payment-message');
+  const submitBtn    = document.getElementById('submit-payment-btn');
+  const submitBtnTxt = document.getElementById('submit-btn-text');
+
+  function setSubmitting(isSubmitting) {
+    submitBtn.disabled = isSubmitting;
+    submitBtnTxt.textContent = isSubmitting ? 'PROCESSING...' : 'PLACE ORDER';
+  }
+
+  // Debounced so rapid +/- clicks don't spam the API — waits for clicks to settle.
+  function scheduleRefreshPaymentIntent() {
+    clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(refreshPaymentIntent, 500);
+  }
+
+  async function refreshPaymentIntent() {
+    const cart = getCart();
+
+    if (cart.length === 0) {
+      orderPanel.style.display = 'none';
+      return;
+    }
+
+    try {
+      const res = await fetch(CREATE_INTENT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cart })
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        paymentMsg.textContent = data.error || 'Could not load payment form.';
+        orderPanel.style.display = '';
+        return;
+      }
+
+      // Re-create Elements with the fresh clientSecret (amount may have changed)
+      elements = stripe.elements({
+        clientSecret: data.clientSecret,
+        fonts: [
+          {
+            // VT323 is your site's Google-hosted pixel font (used for the logo/
+            // panel titles). Google-hosted fonts load into Stripe's iframe far
+            // more reliably than a self-hosted TTF like 04b03, which Stripe's
+            // sandboxed renderer was silently rejecting.
+            cssSrc: 'https://fonts.googleapis.com/css2?family=VT323&display=swap'
+          }
+        ],
+        appearance: {
+          theme: 'stripe',
+          variables: {
+            colorPrimary:     '#d365e4',   // your --pink
+            colorBackground:  '#fffffe',   // your --panel-main
+            colorText:        '#2c2129',   // your --black
+            colorDanger:      '#cc0000',
+            fontFamily:       "'VT323', monospace",
+            fontSizeBase:     '18px',      // VT323 reads small at normal sizes — bump it up
+            borderRadius:     '4px',       // matches your cart buttons/inputs
+            spacingUnit:      '4px'
+          },
+          rules: {
+            '.Tab': {
+              border: '2px solid #75707c',       // your --border-tl
+              boxShadow: 'none',
+              fontFamily: "'VT323', monospace"
+            },
+            '.Tab:hover': {
+              color: '#d365e4'
+            },
+            '.Tab--selected': {
+              border: '2px solid #d365e4',
+              backgroundColor: '#fffffe'
+            },
+            '.TabLabel': {
+              fontFamily: "'VT323', monospace"
+            },
+            '.Input': {
+              border: '2px solid #75707c',
+              boxShadow: 'none',
+              fontFamily: "'VT323', monospace"
+            },
+            '.Input:focus': {
+              border: '2px solid #d365e4',
+              boxShadow: '0 0 0 1px #d365e4'
+            },
+            '.Label': {
+              color: '#2c2129',
+              fontFamily: "'VT323', monospace"
+            }
+          }
+        }
+      });
+
+      const linkAuthElement = elements.create('linkAuthentication');
+      document.getElementById('link-authentication-element').innerHTML = '';
+      linkAuthElement.mount('#link-authentication-element');
+      linkAuthElement.on('change', (event) => {
+        customerEmail = event.value.email || '';
+      });
+
+      const paymentElement = elements.create('payment', {
+        fields: { billingDetails: { email: 'never' } } // email is already collected above
+      });
+      document.getElementById('payment-element').innerHTML = '';
+      paymentElement.mount('#payment-element');
+
+      paymentMsg.textContent = '';
+      orderPanel.style.display = '';
+    } catch (err) {
+      console.error(err);
+      paymentMsg.textContent = 'Could not load payment form. Please refresh and try again.';
+      orderPanel.style.display = '';
+    }
+  }
+
+  paymentForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (!elements) return;
+
+    if (!customerEmail || !customerEmail.includes('@')) {
+      paymentMsg.textContent = 'Please enter a valid email address.';
+      return;
+    }
+
+    setSubmitting(true);
+    paymentMsg.textContent = '';
+
+    const { error, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: window.location.origin + '/order-submitted',
+        payment_method_data: {
+          billing_details: { email: customerEmail }
+        }
+      },
+      redirect: 'if_required' // stay on this page unless the bank requires extra verification
+    });
+
+    if (error) {
+      paymentMsg.textContent = error.message || 'Payment failed. Please check your card details.';
+      setSubmitting(false);
+      return;
+    }
+
+    // Success and no redirect was needed — notify the shop, clear the cart, move on.
+    const cart  = getCart();
+    const items = cart
+      .map(i => `${i.qty}x ${i.name}${i.size ? ' (Size ' + i.size + ')' : ''} - $${(i.price * i.qty).toFixed(2)}`)
+      .join('\n');
+    const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0).toFixed(2);
+
+    try {
+      // No duplicate check here on purpose — every completed order should
+      // get its own confirmation email, even repeat orders from the same address.
+      await emailjs.send('service_ipkuns5', 'template_8p9hubu', {
+        order_number: paymentIntent ? paymentIntent.id : ('MM-' + Date.now()),
+        order_date:   new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }),
+        order_items:  items,
+        order_total:  '$' + total,
+        email:        customerEmail
+      });
+    } catch (err) {
+      // Don't block the customer's checkout if the notification email fails —
+      // the order itself already succeeded with Stripe.
+      console.error('EmailJS order notification failed:', err);
+    }
+
+    saveCart([]);
+    window.location.href = '/order-submitted';
+  });
+
+  refreshPaymentIntent();
+})();
+</script>
+</body>
+</html>
