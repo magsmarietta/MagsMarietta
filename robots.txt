@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /checkout.html
+Disallow: /order-submitted.html
+
+Sitemap: https://magsmarietta.com/sitemap.xml

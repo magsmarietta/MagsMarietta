@@ -4,13 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Product — Mags Marietta</title>
+<meta name="robots" content="noindex, follow">
 <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg">
 <link rel="shortcut icon" href="/images/favicon/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-title" content="Mags Marietta">
 <link rel="manifest" href="/images/favicon/site.webmanifest">
-<meta name="description" content="Shop 316L stainless steel jewelry and hardware from Mags Marietta — made to last, not mass produced.">
+<meta name="description" id="meta-description" content="Shop 316L stainless steel jewelry and hardware from Mags Marietta — made to last, not mass produced.">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" id="canonical-link" href="https://magsmarietta.com/product.html">
+<!-- Open Graph (updated per-product by the script at the bottom of this page) -->
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Mags Marietta">
+<meta property="og:title" id="og-title" content="Product — Mags Marietta">
+<meta property="og:description" id="og-description" content="Shop 316L stainless steel jewelry and hardware from Mags Marietta — made to last, not mass produced.">
+<meta property="og:url" id="og-url" content="https://magsmarietta.com/product.html">
+<meta property="og:image" id="og-image" content="https://magsmarietta.com/images/social-preview.jpg">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="twitter-title" content="Product — Mags Marietta">
+<meta name="twitter:description" id="twitter-description" content="Shop 316L stainless steel jewelry and hardware from Mags Marietta — made to last, not mass produced.">
+<meta name="twitter:image" id="twitter-image" content="https://magsmarietta.com/images/social-preview.jpg">
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="mobile.css" media="(max-width: 700px) and (orientation: portrait)">
@@ -601,7 +616,28 @@
     renderNotFound();
   } else {
     document.title = `${product.name} — Mags Marietta`;
+    updateMetaTags(product);
     renderProduct(product);
+  }
+
+  // ── 1b. Update meta/OG/Twitter/canonical tags for this product ──
+  function updateMetaTags(p) {
+    const title = `${p.name} — Mags Marietta`;
+    const desc  = `${p.description} $${p.price.toFixed(2)}, 316L stainless steel. Free US shipping.`;
+    const url   = `https://magsmarietta.com/product.html?id=${p.id}`;
+    const image = p.thumbnail
+      ? `https://magsmarietta.com/${p.thumbnail}`
+      : 'https://magsmarietta.com/images/social-preview.jpg';
+
+    document.getElementById('meta-description').setAttribute('content', desc);
+    document.getElementById('canonical-link').setAttribute('href', url);
+    document.getElementById('og-title').setAttribute('content', title);
+    document.getElementById('og-description').setAttribute('content', desc);
+    document.getElementById('og-url').setAttribute('content', url);
+    document.getElementById('og-image').setAttribute('content', image);
+    document.getElementById('twitter-title').setAttribute('content', title);
+    document.getElementById('twitter-description').setAttribute('content', desc);
+    document.getElementById('twitter-image').setAttribute('content', image);
   }
 
   // ── 2. Not found state ───────────────────────────────
