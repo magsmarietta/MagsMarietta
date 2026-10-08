@@ -240,6 +240,18 @@ async function handleEmailSubmit(btn) {
 
     await emailjs.send('service_ipkuns5', 'template_9lv13af', { email: val });
 
+    // Email went out — now record them on the list. If this save fails, the
+    // signup still succeeded from the visitor's side, so don't show an error.
+    try {
+      await fetch('https://mags-marietta.vercel.app/api/check-subscriber', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: val, save: true })
+      });
+    } catch (saveErr) {
+      console.error('Saving subscriber failed:', saveErr);
+    }
+
     btn.textContent       = 'SENT';
     btn.style.background  = '#222';
     input.value            = '';
