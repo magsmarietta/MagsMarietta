@@ -166,38 +166,7 @@
 
 /* ===== HOME PAGE MOBILE ===== */
 
-/* Hide update log, shop status, and tags panels */
-.home-page .home-log-panel,
-.home-page .home-status-panel,
-.home-page .home-tags-panel {
-  display: none;
-}
-
-/* Stack layout vertically, full width (navigation sits on top) */
-.home-page #page-wrap {
-  grid-template-columns: 1fr;
-}
-
-.home-page #sidebar {
-  width: 100%;
-}
-
-/* Nav panel becomes 2x2 grid */
-.home-page .nav-links {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-}
-
-.home-page .nav-links a {
-  width: 100%;
-}
-
-.home-page #main-content {
-  width: 100%;
-}
-
 /* Featured products go single file (one per row) */
-.home-page .product-grid {
+#featured-grid {
   grid-template-columns: 1fr;
 }
