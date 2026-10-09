@@ -369,3 +369,12 @@ async function handleEmailSubmit(btn) {
     });
   });
 })();
+
+
+// ===== BLOCK IMAGE DRAG-AND-DROP =====
+// Stops images and GIFs from being dragged to the desktop or into other tabs.
+// Listens on the whole document, so images added later (shop cards, cart
+// thumbnails) are covered too. Clicks and hover effects are unaffected.
+document.addEventListener('dragstart', function (e) {
+  if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+});
