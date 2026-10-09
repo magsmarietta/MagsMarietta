@@ -58,9 +58,9 @@
   width: 100%;
 }
 
-/* Products go to 3 columns since we have full width now */
+/* Products go single file (one per row) */
 .shop-page .product-grid {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   padding-bottom: 12px;
 }
 
@@ -162,4 +162,42 @@
 
 .checkout-page #main-content {
   width: 100%;
+}
+
+/* ===== HOME PAGE MOBILE ===== */
+
+/* Hide update log, shop status, and tags panels */
+.home-page .home-log-panel,
+.home-page .home-status-panel,
+.home-page .home-tags-panel {
+  display: none;
+}
+
+/* Stack layout vertically, full width (navigation sits on top) */
+.home-page #page-wrap {
+  grid-template-columns: 1fr;
+}
+
+.home-page #sidebar {
+  width: 100%;
+}
+
+/* Nav panel becomes 2x2 grid */
+.home-page .nav-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.home-page .nav-links a {
+  width: 100%;
+}
+
+.home-page #main-content {
+  width: 100%;
+}
+
+/* Featured products go single file (one per row) */
+.home-page .product-grid {
+  grid-template-columns: 1fr;
 }

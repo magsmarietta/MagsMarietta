@@ -4,7 +4,7 @@
 
 // ===== CART PANEL: RESPONSIVE PLACEMENT =====
 // Desktop (any page):        sidebar, collapsible
-// Mobile + home page:        sidebar, collapsible
+// Mobile + home page:        moved under Featured Items, not collapsible
 // Mobile + shop/product page: moved to end of main content
 // Mobile + about page:       hidden entirely
 (function () {
@@ -12,7 +12,7 @@
   const anchorSide = document.getElementById('cart-anchor-sidebar');
   if (!cartPanel || !anchorSide) return;
 
-  const anchorMain = document.getElementById('cart-anchor-main'); // only exists on shop/product pages
+  const anchorMain = document.getElementById('cart-anchor-main'); // only exists on home/shop/product pages
   const mq = window.matchMedia('(max-width: 700px) and (orientation: portrait)');
 
   function placeCartPanel() {
@@ -20,7 +20,8 @@
     const isAboutPage        = document.body.classList.contains('about-page');
     const isCheckoutPage     = document.body.classList.contains('checkout-page');
     const isShopOrProductPage = document.body.classList.contains('shop-page') ||
-                                 document.body.classList.contains('product-page');
+                                 document.body.classList.contains('product-page') ||
+                                 document.body.classList.contains('home-page');
 
     if (isCheckoutPage || (isMobile && isAboutPage)) {
       cartPanel.style.display = 'none';
